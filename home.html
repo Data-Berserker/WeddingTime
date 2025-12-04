@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriela & Juan Carlos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #faf9f7;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .invitation {
+            background: white;
+            max-width: 420px;
+            width: 100%;
+            border-radius: 3px;
+            box-shadow: 0 2px 40px rgba(0,0,0,0.06);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #f0ebe3;
+        }
+        
+        .header {
+            background: white;
+            padding: 50px 30px 40px;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid #f0ebe3;
+        }
+        
+        .monogram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 25px;
+        }
+        
+        .initial-g, .initial-j {
+            font-family: 'Great Vibes', cursive;
+            font-size: 75px;
+            color: #e8a849;
+            line-height: 1;
+        }
+        
+        .initial-g {
+            transform: rotate(-5deg);
+        }
+        
+        .initial-j {
+            transform: rotate(5deg);
+            position: relative;
+            top: 8px;
+        }
+        
+        .initial-amp {
+            font-family: 'Great Vibes', cursive;
+            font-size: 36px;
+            color: #d4893a;
+            margin: 0 8px;
+            position: relative;
+            top: 12px;
+        }
+        
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 5px;
+            color: #bbb;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        
+        .names {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 300;
+            color: #3a3a3a;
+            line-height: 1.3;
+        }
+        
+        .ampersand {
+            font-size: 24px;
+            display: block;
+            margin: 3px 0;
+            color: #e8a849;
+        }
+        
+        .content {
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .message {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 17px;
+            font-style: italic;
+            color: #888;
+            margin-bottom: 35px;
+            line-height: 1.7;
+        }
+        
+        .date-main {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            font-weight: 500;
+            color: #3a3a3a;
+            margin-bottom: 4px;
+        }
+        
+        .date-year {
+            font-size: 13px;
+            letter-spacing: 4px;
+            color: #bbb;
+            margin-bottom: 35px;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+        
+        .divider-line {
+            width: 50px;
+            height: 1px;
+            background: #e8a849;
+            opacity: 0.5;
+        }
+        
+        .divider-flower {
+            font-size: 18px;
+            color: #e8a849;
+        }
+        
+        .event {
+            margin-bottom: 35px;
+        }
+        
+        .event:last-of-type {
+            margin-bottom: 10px;
+        }
+        
+        .event-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 12px;
+            opacity: 0.8;
+        }
+        
+        .event-title {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #bbb;
+            margin-bottom: 8px;
+        }
+        
+        .event-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 500;
+            color: #3a3a3a;
+            margin-bottom: 4px;
+        }
+        
+        .event-time {
+            font-size: 14px;
+            color: #e8a849;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+        
+        .location-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: #3a3a3a;
+            text-decoration: none;
+            padding: 10px 22px;
+            border-radius: 2px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 1px solid #e0d8cc;
+        }
+        
+        .location-btn:hover {
+            background: #e8a849;
+            border-color: #e8a849;
+            color: white;
+        }
+        
+        .location-btn svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+        
+        .footer {
+            background: #fdfcfa;
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid #f0ebe3;
+        }
+        
+        .footer-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 15px;
+            font-style: italic;
+            color: #aaa;
+        }
+        
+        .flower-accent {
+            color: #e8a849;
+        }
+        
+        .cempasuchil-decoration {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+        
+        .cempasuchil-decoration span {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="invitation">
+        <div class="header">
+            <div class="monogram">
+                <span class="initial-g">J</span>
+                <span class="initial-amp">&</span>
+                <span class="initial-j">G</span>
+            </div>
+            <p class="subtitle">Nuestra Boda</p>
+            <h1 class="names">
+                Juan Carlos
+                <span class="ampersand">&</span>
+                Gabriela
+            </h1>
+        </div>
+        
+        <div class="content">
+            <p class="message">
+                Con la satisfacción de ver cumplido un sueño,<br>
+                tenemos el honor de invitarles a celebrar nuestra unión
+            </p>
+            
+            <p class="date-main">Sábado 7 de Noviembre</p>
+            <p class="date-year">2026</p>
+            
+            <div class="divider">
+                <span class="divider-line"></span>
+                <span class="divider-flower">✿</span>
+                <span class="divider-line"></span>
+            </div>
+            
+            <div class="event">
+                <img src="https://cdn-icons-png.freepik.com/512/1274/1274415.png" alt="Iglesia" class="event-icon">
+                <p class="event-title">Ceremonia Religiosa</p>
+                <p class="event-name">Templo del Señor del Encino</p>
+                <p class="event-time">1:00 PM</p>
+                <a href="https://maps.app.goo.gl/9xQmqPfKV2L7K6nD6" target="_blank" class="location-btn">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    Ver Ubicación
+                </a>
+            </div>
+            
+            <div class="event">
+                <img src="https://cdn-icons-png.flaticon.com/512/589/589762.png" alt="Fiesta" class="event-icon">
+                <p class="event-title">Recepción</p>
+                <p class="event-name">Hacienda Los Cuartos</p>
+                <p class="event-time">5:00 PM</p>
+                <a href="https://maps.app.goo.gl/YvPg3GKqv3FjKQ7z5" target="_blank" class="location-btn">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    Ver Ubicación
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p class="footer-text">
+                <span class="flower-accent">✿</span> ¡Los esperamos! <span class="flower-accent">✿</span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
