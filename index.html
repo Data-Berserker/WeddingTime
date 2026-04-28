@@ -1,309 +1,1125 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabriela & Juan Carlos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400&family=Great+Vibes&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: #faf9f7;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .invitation {
-            background: white;
-            max-width: 420px;
-            width: 100%;
-            border-radius: 3px;
-            box-shadow: 0 2px 40px rgba(0,0,0,0.06);
-            overflow: hidden;
-            position: relative;
-            border: 1px solid #f0ebe3;
-        }
-        
-        .header {
-            background: white;
-            padding: 50px 30px 40px;
-            text-align: center;
-            position: relative;
-            border-bottom: 1px solid #f0ebe3;
-        }
-        
-        .monogram {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            margin-bottom: 25px;
-        }
-        
-        .initial-g, .initial-j {
-            font-family: 'Great Vibes', cursive;
-            font-size: 75px;
-            color: #e8a849;
-            line-height: 1;
-        }
-        
-        .initial-g {
-            transform: rotate(-5deg);
-        }
-        
-        .initial-j {
-            transform: rotate(5deg);
-            position: relative;
-            top: 8px;
-        }
-        
-        .initial-amp {
-            font-family: 'Great Vibes', cursive;
-            font-size: 36px;
-            color: #d4893a;
-            margin: 0 8px;
-            position: relative;
-            top: 12px;
-        }
-        
-        .subtitle {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 10px;
-            letter-spacing: 5px;
-            color: #bbb;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-        
-        .names {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-weight: 300;
-            color: #3a3a3a;
-            line-height: 1.3;
-        }
-        
-        .ampersand {
-            font-size: 24px;
-            display: block;
-            margin: 3px 0;
-            color: #e8a849;
-        }
-        
-        .content {
-            padding: 40px 30px;
-            text-align: center;
-        }
-        
-        .message {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 17px;
-            font-style: italic;
-            color: #888;
-            margin-bottom: 35px;
-            line-height: 1.7;
-        }
-        
-        .date-main {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
-            font-weight: 500;
-            color: #3a3a3a;
-            margin-bottom: 4px;
-        }
-        
-        .date-year {
-            font-size: 13px;
-            letter-spacing: 4px;
-            color: #bbb;
-            margin-bottom: 35px;
-        }
-        
-        .divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 35px;
-        }
-        
-        .divider-line {
-            width: 50px;
-            height: 1px;
-            background: #e8a849;
-            opacity: 0.5;
-        }
-        
-        .divider-flower {
-            font-size: 18px;
-            color: #e8a849;
-        }
-        
-        .event {
-            margin-bottom: 35px;
-        }
-        
-        .event:last-of-type {
-            margin-bottom: 10px;
-        }
-        
-        .event-icon {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 12px;
-            opacity: 0.8;
-        }
-        
-        .event-title {
-            font-size: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #bbb;
-            margin-bottom: 8px;
-        }
-        
-        .event-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
-            font-weight: 500;
-            color: #3a3a3a;
-            margin-bottom: 4px;
-        }
-        
-        .event-time {
-            font-size: 14px;
-            color: #e8a849;
-            font-weight: 400;
-            margin-bottom: 15px;
-        }
-        
-        .location-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: transparent;
-            color: #3a3a3a;
-            text-decoration: none;
-            padding: 10px 22px;
-            border-radius: 2px;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            border: 1px solid #e0d8cc;
-        }
-        
-        .location-btn:hover {
-            background: #e8a849;
-            border-color: #e8a849;
-            color: white;
-        }
-        
-        .location-btn svg {
-            width: 14px;
-            height: 14px;
-            fill: currentColor;
-        }
-        
-        .footer {
-            background: #fdfcfa;
-            padding: 25px;
-            text-align: center;
-            border-top: 1px solid #f0ebe3;
-        }
-        
-        .footer-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 15px;
-            font-style: italic;
-            color: #aaa;
-        }
-        
-        .flower-accent {
-            color: #e8a849;
-        }
-        
-        .cempasuchil-decoration {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 8px;
-            opacity: 0.7;
-        }
-        
-        .cempasuchil-decoration span {
-            font-size: 12px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juan Carlos & Gabriela – 07.11.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --burgundy: #6B1E3A;
+    --burgundy-dark: #4A1228;
+    --burgundy-light: #9B3A5A;
+    --rose: #C47A8A;
+    --cream: #FAF5EE;
+    --cream-dark: #F0E8DC;
+    --gold: #B8935A;
+    --gold-light: #D4AF75;
+    --text-dark: #2C1A22;
+    --text-mid: #6B4459;
+    --text-light: #9B7A8A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: #1A0D14;
+    font-family: 'Raleway', sans-serif;
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  .page-wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--cream);
+  }
+
+  /* ── SECCIÓN 1: PORTADA ── */
+  .cover {
+    background: var(--burgundy-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(180,80,110,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 30% at 50% 100%, rgba(100,20,50,0.4) 0%, transparent 70%);
+  }
+
+  .floral-top, .floral-bottom {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    pointer-events: none;
+  }
+  .floral-top { top: 0; }
+  .floral-bottom { bottom: 0; transform: rotate(180deg); }
+
+  .cover-inner { position: relative; z-index: 2; }
+
+  .cover-date-top {
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0.9;
+  }
+
+  .cover-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .cover-name-1 { font-size: 72px; font-weight: 300; }
+  .cover-ampersand {
+    font-size: 56px;
+    color: var(--gold-light);
+    display: block;
+    margin: 4px 0;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .cover-name-2 { font-size: 72px; font-weight: 300; }
+
+  .cover-divider {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-light), transparent);
+    margin: 28px auto;
+  }
+
+  .cover-date-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold-light);
+    letter-spacing: 3px;
+    font-weight: 300;
+  }
+
+  .cover-invite-text {
+    margin-top: 24px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  /* ── SECCIÓN 2: CUENTA REGRESIVA ── */
+  .countdown-section {
+    background: var(--burgundy);
+    padding: 50px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .countdown-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(200,100,130,0.12) 0%, transparent 70%);
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  .countdown-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    font-style: italic;
+  }
+
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 72px;
+  }
+
+  .countdown-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1;
+    min-width: 72px;
+    text-align: center;
+  }
+
+  .countdown-sep {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    color: var(--gold-light);
+    padding: 0 2px;
+    line-height: 1;
+    align-self: flex-start;
+    padding-top: 4px;
+  }
+
+  .countdown-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-top: 6px;
+    font-weight: 400;
+  }
+
+  /* ── SECCIÓN 3: MONOGRAMA + MENSAJE ── */
+  .monogram-section {
+    background: var(--cream);
+    padding: 56px 40px;
+    text-align: center;
+  }
+
+  .monogram {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    color: var(--burgundy);
+    font-weight: 300;
+    letter-spacing: 8px;
+    margin-bottom: 6px;
+  }
+
+  .monogram-sub {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 36px;
+  }
+
+  .message-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-mid);
+    max-width: 340px;
+    margin: 0 auto 32px;
+  }
+
+  .parents-block {
+    border-top: 0.5px solid var(--rose);
+    border-bottom: 0.5px solid var(--rose);
+    padding: 20px 0;
+    margin-top: 4px;
+  }
+
+  .parents-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+
+  .parents-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text-mid);
+  }
+
+  /* ── SECCIÓN 4: CEREMONIA ── */
+  .event-section {
+    background: var(--cream-dark);
+    padding: 52px 40px;
+    text-align: center;
+  }
+
+  .event-block { margin-bottom: 40px; }
+  .event-block:last-child { margin-bottom: 0; }
+
+  .event-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .event-type {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .event-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: var(--burgundy-dark);
+    margin-bottom: 8px;
+  }
+
+  .event-venue {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--burgundy);
+    margin-bottom: 6px;
+  }
+
+  .event-address {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+  }
+
+  .event-btn {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 10px 24px;
+    border: 1px solid var(--burgundy);
+    color: var(--burgundy);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    transition: background 0.25s, color 0.25s;
+  }
+  .event-btn:hover { background: var(--burgundy); color: #fff; }
+
+  .event-divider {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--rose), transparent);
+    margin: 0 auto 40px;
+  }
+
+  /* ── SECCIÓN 5: ITINERARIO ── */
+  .itinerary-section {
+    background: var(--cream);
+    padding: 52px 40px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 300;
+    color: var(--burgundy-dark);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .section-subtitle {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--rose), var(--burgundy-light), var(--rose));
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-left: 28px;
+    padding-bottom: 28px;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-dot {
+    position: absolute;
+    left: -21px;
+    top: 6px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--burgundy);
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 1px var(--rose);
+  }
+
+  .timeline-time {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .timeline-event {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    color: var(--burgundy-dark);
+    font-weight: 400;
+  }
+
+  .timeline-note {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 3px;
+    line-height: 1.5;
+  }
+
+  /* ── SECCIÓN 6: DRESSCODE ── */
+  .dresscode-section {
+    background: var(--burgundy-dark);
+    padding: 52px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dresscode-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(180,80,110,0.15) 0%, transparent 70%);
+  }
+
+  .dresscode-inner { position: relative; z-index: 1; }
+
+  .dresscode-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+  }
+
+  .dresscode-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 300;
+    color: #fff;
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+
+  .dresscode-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    max-width: 320px;
+    margin: 0 auto;
+    letter-spacing: 0.3px;
+  }
+
+  .dresscode-colors {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  .color-chip {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.2);
+  }
+
+  /* ── SECCIÓN 7: HOSPEDAJE + REGALOS ── */
+  .info-section {
+    background: var(--cream);
+    padding: 52px 40px;
+  }
+
+  .info-card {
+    background: var(--cream-dark);
+    border: 0.5px solid var(--rose);
+    border-radius: 2px;
+    padding: 28px 24px;
+    margin-bottom: 20px;
+  }
+  .info-card:last-child { margin-bottom: 0; }
+
+  .info-card-icon {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .info-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--burgundy-dark);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .info-card-text {
+    font-size: 13px;
+    color: var(--text-mid);
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  .info-link {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rose);
+    padding-bottom: 2px;
+  }
+
+  /* ── SECCIÓN 8: CONFIRMACIÓN ── */
+  .rsvp-section {
+    background: var(--cream-dark);
+    padding: 52px 40px;
+    text-align: center;
+  }
+
+  .rsvp-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    max-width: 320px;
+    margin: 0 auto 28px;
+  }
+
+  .rsvp-btn {
+    display: inline-block;
+    background: var(--burgundy);
+    color: #fff;
+    padding: 16px 40px;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    margin-bottom: 18px;
+  }
+
+  .rsvp-deadline {
+    font-size: 12px;
+    color: var(--text-light);
+    letter-spacing: 1px;
+  }
+
+  /* ── SECCIÓN FINAL: CIERRE ── */
+  .closing-section {
+    background: var(--burgundy-dark);
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.8;
+    max-width: 340px;
+    margin: 0 auto 32px;
+  }
+
+  .closing-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    color: var(--gold-light);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .closing-date {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-top: 16px;
+  }
+
+  /* Floral SVG decorations */
+  .floral-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 12px 0;
+  }
+
+  .floral-divider-line {
+    height: 0.5px;
+    background: linear-gradient(to right, transparent, var(--rose));
+    flex: 1;
+  }
+  .floral-divider-line.right {
+    background: linear-gradient(to left, transparent, var(--rose));
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .cover-inner > * {
+    animation: fadeUp 1s ease both;
+  }
+  .cover-date-top { animation-delay: 0.1s; }
+  .cover-names { animation-delay: 0.3s; }
+  .cover-divider { animation-delay: 0.6s; }
+  .cover-date-main { animation-delay: 0.8s; }
+  .cover-invite-text { animation-delay: 1s; }
+
+  /* FOTOS */
+  .photo-section {
+    overflow: hidden;
+    position: relative;
+    background: var(--burgundy-dark);
+  }
+  .photo-full {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4/5;
+  }
+  .photo-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 48px 28px 24px;
+    background: linear-gradient(to top, rgba(74,18,40,0.85) 0%, transparent 100%);
+    text-align: center;
+  }
+  .photo-caption-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: rgba(255,255,255,0.85);
+  }
+  .photo-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    background: var(--burgundy-dark);
+  }
+  .photo-pair .photo-slot {
+    aspect-ratio: 3/4;
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  .photo-placeholder {
+    aspect-ratio: inherit;
+    background: var(--cream-dark);
+    border: 1.5px dashed var(--rose);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text-light);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .photo-placeholder svg { opacity: 0.35; }
+</style>
 </head>
 <body>
-    <div class="invitation">
-        <div class="header">
-            <div class="monogram">
-                <span class="initial-g">J</span>
-                <span class="initial-amp">&</span>
-                <span class="initial-j">G</span>
-            </div>
-            <p class="subtitle">Nuestra Boda</p>
-            <h1 class="names">
-                Juan Carlos
-                <span class="ampersand">&</span>
-                Gabriela
-            </h1>
-        </div>
-        
-        <div class="content">
-            <p class="message">
-                Con la satisfacción de ver cumplido un sueño,<br>
-                tenemos el honor de invitarles a celebrar nuestra unión
-            </p>
-            
-            <p class="date-main">Sábado 7 de Noviembre</p>
-            <p class="date-year">2026</p>
-            
-            <div class="divider">
-                <span class="divider-line"></span>
-                <span class="divider-flower">✿</span>
-                <span class="divider-line"></span>
-            </div>
-            
-            <div class="event">
-                <img src="https://cdn-icons-png.flaticon.com/512/589/589762.png" alt="Fiesta" class="event-icon">
-                <p class="event-title">Ceremonia Religiosa</p>
-                <p class="event-name">Templo del Señor del Encino</p>
-                <p class="event-time">1:00 PM</p>
-                <a href="https://share.google/HlB2Tf7qILPmcQbJj" target="_blank" class="location-btn">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                    Ver Ubicación
-                </a>
-            </div>
-            
-            <div class="event">
-                <img src="https://cdn-icons-png.freepik.com/512/1274/1274415.png" alt="Iglesia" class="event-icon">
-                <p class="event-title">Recepción</p>
-                <p class="event-name">Hacienda Los Cuartos</p>
-                <p class="event-time">5:00 PM</p>
-                <a href="https://share.google/4WlpTd6TupZkxBzXF" target="_blank" class="location-btn">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                    Ver Ubicación
-                </a>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p class="footer-text">
-                <span class="flower-accent">✿</span> ¡Los esperamos! <span class="flower-accent">✿</span>
-            </p>
-        </div>
+<div class="page-wrap">
+
+  <!-- ═══ PORTADA ═══ -->
+  <section class="cover">
+    <!-- Floral SVG top -->
+    <svg class="floral-top" viewBox="0 0 480 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice">
+      <!-- Ramas y flores decorativas borgoña/rosa -->
+      <g opacity="0.55">
+        <!-- Ramas izquierdas -->
+        <path d="M-10,0 Q40,40 20,80 Q60,60 90,100" stroke="#C47A8A" stroke-width="1.2" fill="none"/>
+        <path d="M-10,20 Q30,50 50,90" stroke="#9B3A5A" stroke-width="0.8" fill="none"/>
+        <!-- Hojas izquierda -->
+        <ellipse cx="20" cy="45" rx="8" ry="4" transform="rotate(-30 20 45)" fill="#6B1E3A" opacity="0.7"/>
+        <ellipse cx="50" cy="70" rx="7" ry="3.5" transform="rotate(-15 50 70)" fill="#9B3A5A" opacity="0.6"/>
+        <ellipse cx="35" cy="85" rx="9" ry="4" transform="rotate(20 35 85)" fill="#6B1E3A" opacity="0.5"/>
+        <!-- Flores pequeñas izquierda -->
+        <circle cx="25" cy="30" r="6" fill="#C47A8A" opacity="0.6"/>
+        <circle cx="25" cy="30" r="3" fill="#FAF5EE" opacity="0.3"/>
+        <circle cx="60" cy="55" r="5" fill="#9B3A5A" opacity="0.7"/>
+        <circle cx="90" cy="95" r="7" fill="#C47A8A" opacity="0.5"/>
+        <circle cx="90" cy="95" r="3.5" fill="#FAF5EE" opacity="0.25"/>
+        <!-- Bayas izquierda -->
+        <circle cx="45" cy="40" r="3" fill="#B8935A" opacity="0.6"/>
+        <circle cx="52" cy="36" r="2" fill="#B8935A" opacity="0.5"/>
+        <circle cx="40" cy="35" r="2" fill="#B8935A" opacity="0.4"/>
+
+        <!-- Ramas derechas -->
+        <path d="M490,0 Q440,40 460,80 Q420,60 390,100" stroke="#C47A8A" stroke-width="1.2" fill="none"/>
+        <path d="M490,20 Q450,50 430,90" stroke="#9B3A5A" stroke-width="0.8" fill="none"/>
+        <!-- Hojas derecha -->
+        <ellipse cx="460" cy="45" rx="8" ry="4" transform="rotate(30 460 45)" fill="#6B1E3A" opacity="0.7"/>
+        <ellipse cx="430" cy="70" rx="7" ry="3.5" transform="rotate(15 430 70)" fill="#9B3A5A" opacity="0.6"/>
+        <ellipse cx="445" cy="85" rx="9" ry="4" transform="rotate(-20 445 85)" fill="#6B1E3A" opacity="0.5"/>
+        <!-- Flores derecha -->
+        <circle cx="455" cy="30" r="6" fill="#C47A8A" opacity="0.6"/>
+        <circle cx="455" cy="30" r="3" fill="#FAF5EE" opacity="0.3"/>
+        <circle cx="420" cy="55" r="5" fill="#9B3A5A" opacity="0.7"/>
+        <circle cx="390" cy="95" r="7" fill="#C47A8A" opacity="0.5"/>
+        <circle cx="390" cy="95" r="3.5" fill="#FAF5EE" opacity="0.25"/>
+        <!-- Bayas derecha -->
+        <circle cx="435" cy="40" r="3" fill="#B8935A" opacity="0.6"/>
+        <circle cx="428" cy="36" r="2" fill="#B8935A" opacity="0.5"/>
+        <circle cx="440" cy="35" r="2" fill="#B8935A" opacity="0.4"/>
+
+        <!-- Centro top -->
+        <path d="M200,0 Q240,30 280,0" stroke="#9B3A5A" stroke-width="0.7" fill="none"/>
+        <circle cx="240" cy="20" r="5" fill="#C47A8A" opacity="0.5"/>
+        <ellipse cx="220" cy="10" rx="6" ry="3" transform="rotate(-10 220 10)" fill="#6B1E3A" opacity="0.4"/>
+        <ellipse cx="260" cy="10" rx="6" ry="3" transform="rotate(10 260 10)" fill="#6B1E3A" opacity="0.4"/>
+      </g>
+    </svg>
+
+    <div class="cover-inner">
+      <p class="cover-date-top">Aguascalientes, México</p>
+      <div class="cover-names">
+        <span class="cover-name-1">Gabriela</span>
+        <span class="cover-ampersand">&</span>
+        <span class="cover-name-2">Juan Carlos</span>
+      </div>
+      <div class="cover-divider"></div>
+      <p class="cover-date-main">07 · 11 · 2026</p>
+      <p class="cover-invite-text">¡Nos casamos!</p>
     </div>
+
+    <!-- Floral bottom -->
+    <svg class="floral-bottom" viewBox="0 0 480 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+      <g opacity="0.55">
+        <path d="M-10,160 Q40,120 20,80 Q60,100 90,60" stroke="#C47A8A" stroke-width="1.2" fill="none"/>
+        <ellipse cx="20" cy="115" rx="8" ry="4" transform="rotate(30 20 115)" fill="#6B1E3A" opacity="0.7"/>
+        <circle cx="25" cy="130" r="6" fill="#C47A8A" opacity="0.6"/>
+        <circle cx="60" cy="105" r="5" fill="#9B3A5A" opacity="0.7"/>
+        <circle cx="45" cy="125" r="3" fill="#B8935A" opacity="0.6"/>
+        <path d="M490,160 Q440,120 460,80 Q420,100 390,60" stroke="#C47A8A" stroke-width="1.2" fill="none"/>
+        <ellipse cx="460" cy="115" rx="8" ry="4" transform="rotate(-30 460 115)" fill="#6B1E3A" opacity="0.7"/>
+        <circle cx="455" cy="130" r="6" fill="#C47A8A" opacity="0.6"/>
+        <circle cx="420" cy="105" r="5" fill="#9B3A5A" opacity="0.7"/>
+        <circle cx="435" cy="125" r="3" fill="#B8935A" opacity="0.6"/>
+      </g>
+    </svg>
+  </section>
+
+  <!-- ═══ CUENTA REGRESIVA ═══ -->
+  <section class="countdown-section">
+    <p class="section-label">Faltan</p>
+    <p class="countdown-title">días para el gran día</p>
+    <div class="countdown-grid">
+      <div class="countdown-item">
+        <span class="countdown-num" id="cd-dias">000</span>
+        <span class="countdown-label">Días</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-item">
+        <span class="countdown-num" id="cd-horas">00</span>
+        <span class="countdown-label">Horas</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-item">
+        <span class="countdown-num" id="cd-min">00</span>
+        <span class="countdown-label">Min</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-item">
+        <span class="countdown-num" id="cd-seg">00</span>
+        <span class="countdown-label">Seg</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MONOGRAMA + MENSAJE ═══ -->
+  <section class="monogram-section">
+    <!-- Pequeño floral SVG centrado -->
+    <svg width="160" height="60" viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 20px;opacity:0.7">
+      <path d="M80,30 Q60,10 40,20 Q30,30 40,40 Q60,50 80,30Z" fill="#C47A8A" opacity="0.4"/>
+      <path d="M80,30 Q100,10 120,20 Q130,30 120,40 Q100,50 80,30Z" fill="#C47A8A" opacity="0.4"/>
+      <circle cx="80" cy="30" r="5" fill="#6B1E3A" opacity="0.6"/>
+      <path d="M20,30 Q40,20 55,30" stroke="#9B3A5A" stroke-width="0.8" fill="none" opacity="0.5"/>
+      <path d="M140,30 Q120,20 105,30" stroke="#9B3A5A" stroke-width="0.8" fill="none" opacity="0.5"/>
+      <circle cx="15" cy="30" r="3" fill="#B8935A" opacity="0.5"/>
+      <circle cx="145" cy="30" r="3" fill="#B8935A" opacity="0.5"/>
+      <circle cx="25" cy="22" r="2" fill="#C47A8A" opacity="0.4"/>
+      <circle cx="135" cy="22" r="2" fill="#C47A8A" opacity="0.4"/>
+    </svg>
+
+    <div class="monogram">G · JC</div>
+    <p class="monogram-sub">¡Nos casamos!</p>
+
+    <p class="message-text">
+      Con el amor que nos une, la bendición de Dios y el apoyo de nuestras familias,
+      tenemos el honor de invitarlos a celebrar el sacramento del matrimonio.
+    </p>
+
+    <div class="parents-block">
+      <p class="parents-label">Sus padres</p>
+      <div class="parents-names">
+        <p>Padres del novio</p>
+        <p style="color:var(--text-light);font-size:13px;letter-spacing:0.5px;">&nbsp;</p>
+        <p>Padres de la novia</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOTO 1 ═══ -->
+  <div class="photo-section">
+    <img src="foto1.jpg" alt="Gabriela y Juan Carlos" class="photo-full"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="photo-placeholder" style="display:none;aspect-ratio:4/5;width:100%;">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="7" width="30" height="22" rx="2" stroke="#9B7A8A" stroke-width="1.2"/>
+        <circle cx="18" cy="18" r="6" stroke="#9B7A8A" stroke-width="1.2"/>
+        <circle cx="27" cy="11" r="2" fill="#9B7A8A"/>
+      </svg>
+      foto1.jpg
+    </div>
+    <div class="photo-caption">
+      <p class="photo-caption-text">Nuestra historia de amor</p>
+    </div>
+  </div>
+
+  <!-- ═══ CEREMONIA Y RECEPCIÓN ═══ -->
+  <section class="event-section">
+    <p class="section-label" style="text-align:center;margin-bottom:36px;">El gran día</p>
+
+    <div class="event-block">
+      <div class="event-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 4 L16 14 M16 4 Q16 2 14 2 L12 4 Q16 6 20 4 L18 2 Q16 2 16 4Z" stroke="#B8935A" stroke-width="1.2" fill="none"/>
+          <path d="M8 14 Q16 10 24 14 L22 28 Q16 30 10 28 Z" stroke="#6B1E3A" stroke-width="1.2" fill="none"/>
+          <path d="M10 14 L10 28 M22 14 L22 28" stroke="#9B3A5A" stroke-width="0.6" fill="none"/>
+        </svg>
+      </div>
+      <p class="event-type">Ceremonia religiosa</p>
+      <p class="event-time">18:00 hrs</p>
+      <p class="event-venue">Templo del Señor del Encino</p>
+      <p class="event-address">
+        Jardín del Encino, Centro Histórico<br>
+        Aguascalientes, Ags.
+      </p>
+      <a href="https://maps.google.com/?q=Templo+del+Señor+del+Encino+Aguascalientes" class="event-btn" target="_blank">Ver en mapa</a>
+    </div>
+
+    <div class="event-divider"></div>
+
+    <div class="event-block">
+      <div class="event-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="24" height="20" rx="1" stroke="#6B1E3A" stroke-width="1.2" fill="none"/>
+          <path d="M4 14 L28 14" stroke="#9B3A5A" stroke-width="0.6"/>
+          <path d="M10 4 L10 12 M22 4 L22 12" stroke="#B8935A" stroke-width="1.5"/>
+          <circle cx="12" cy="20" r="1.5" fill="#B8935A"/>
+          <circle cx="16" cy="20" r="1.5" fill="#B8935A"/>
+          <circle cx="20" cy="20" r="1.5" fill="#B8935A"/>
+        </svg>
+      </div>
+      <p class="event-type">Recepción</p>
+      <p class="event-time">20:00 hrs</p>
+      <p class="event-venue">Hacienda Los Cuartos</p>
+      <p class="event-address">
+        Aguascalientes, Ags.
+      </p>
+      <a href="https://maps.google.com/?q=Hacienda+Los+Cuartos+Aguascalientes" class="event-btn" target="_blank">Ver en mapa</a>
+    </div>
+  </section>
+
+  <!-- ═══ FOTOS 2 Y 3 ═══ -->
+  <div class="photo-pair">
+    <div style="aspect-ratio:3/4;position:relative;">
+      <img src="foto2.jpg" alt="Foto 2" class="photo-slot"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="photo-placeholder" style="display:none;width:100%;height:100%;position:absolute;inset:0;">
+        <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="7" width="30" height="22" rx="2" stroke="#9B7A8A" stroke-width="1.2"/>
+          <circle cx="18" cy="18" r="6" stroke="#9B7A8A" stroke-width="1.2"/>
+        </svg>
+        foto2.jpg
+      </div>
+    </div>
+    <div style="aspect-ratio:3/4;position:relative;">
+      <img src="foto3.jpg" alt="Foto 3" class="photo-slot"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="photo-placeholder" style="display:none;width:100%;height:100%;position:absolute;inset:0;">
+        <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="7" width="30" height="22" rx="2" stroke="#9B7A8A" stroke-width="1.2"/>
+          <circle cx="18" cy="18" r="6" stroke="#9B7A8A" stroke-width="1.2"/>
+        </svg>
+        foto3.jpg
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ITINERARIO ═══ -->
+  <section class="itinerary-section">
+    <h2 class="section-title">Itinerario</h2>
+    <p class="section-subtitle">Programa de actividades</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-time">17:30</p>
+        <p class="timeline-event">Recepción de invitados</p>
+        <p class="timeline-note">Templo del Señor del Encino</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-time">18:00</p>
+        <p class="timeline-event">Ceremonia religiosa</p>
+        <p class="timeline-note">Misa de velaciones</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-time">19:30</p>
+        <p class="timeline-event">Traslado a la hacienda</p>
+        <p class="timeline-note">Hacienda Los Cuartos</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-time">20:00</p>
+        <p class="timeline-event">Cóctel de bienvenida</p>
+        <p class="timeline-note">Jardines de la hacienda</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-time">21:00</p>
+        <p class="timeline-event">Entrada de novios y cena</p>
+        <p class="timeline-note">Salón principal</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-time">22:00</p>
+        <p class="timeline-event">Baile y celebración</p>
+        <p class="timeline-note">¡A disfrutar toda la noche!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CÓDIGO DE VESTIMENTA ═══ -->
+  <section class="dresscode-section">
+    <div class="dresscode-inner">
+      <!-- Floral top decoration -->
+      <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 20px;opacity:0.5">
+        <path d="M60,20 Q45,5 30,12 Q22,20 30,28 Q45,35 60,20Z" fill="#C47A8A"/>
+        <path d="M60,20 Q75,5 90,12 Q98,20 90,28 Q75,35 60,20Z" fill="#C47A8A"/>
+        <circle cx="60" cy="20" r="4" fill="#FAF5EE" opacity="0.5"/>
+        <circle cx="15" cy="20" r="3" fill="#B8935A"/>
+        <circle cx="105" cy="20" r="3" fill="#B8935A"/>
+      </svg>
+
+      <p class="dresscode-label">Código de vestimenta</p>
+      <h2 class="dresscode-title">Formal</h2>
+      <p class="dresscode-note">
+        Damas: vestido largo o coctel elegante.<br>
+        Caballeros: traje oscuro o smoking.<br><br>
+        Por favor evitar el color blanco y los tonos muy claros.
+      </p>
+      <div class="dresscode-colors">
+        <div class="color-chip" style="background:#1A1A2E;" title="Azul marino"></div>
+        <div class="color-chip" style="background:#2C3E2D;" title="Verde oscuro"></div>
+        <div class="color-chip" style="background:#3D2C1A;" title="Café oscuro"></div>
+        <div class="color-chip" style="background:#6B1E3A;" title="Borgoña"></div>
+        <div class="color-chip" style="background:#1C1C1C;" title="Negro"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HOSPEDAJE ═══ -->
+  <section class="info-section">
+    <h2 class="section-title" style="text-align:center;margin-bottom:8px;">Información útil</h2>
+    <p class="section-subtitle">Para nuestros invitados</p>
+
+    <div class="info-card">
+      <div class="info-card-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="10" width="24" height="16" rx="2" stroke="#6B1E3A" stroke-width="1.2" fill="none"/>
+          <rect x="6" y="14" width="6" height="5" rx="0.5" stroke="#9B3A5A" stroke-width="0.8" fill="none"/>
+          <rect x="16" y="14" width="6" height="5" rx="0.5" stroke="#9B3A5A" stroke-width="0.8" fill="none"/>
+          <path d="M9 2 L19 2 L22 10 L6 10 Z" stroke="#6B1E3A" stroke-width="1.2" fill="none"/>
+          <path d="M14 2 L14 10" stroke="#9B3A5A" stroke-width="0.6"/>
+        </svg>
+      </div>
+      <h3 class="info-card-title">Sugerencia de hospedaje</h3>
+      <p class="info-card-text">
+        Para quienes vengan de fuera, hay opciones cercanas al centro histórico y a la hacienda.<br><br>
+        <strong>Hotel Boutique El Encino</strong><br>
+        A 2 min caminando del templo<br><br>
+        <strong>Casa Villa</strong><br>
+        Cerca de Hacienda Los Cuartos
+      </p>
+      <div style="text-align:center;">
+        <a href="#" class="info-link">Más información</a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="6" width="22" height="16" rx="2" stroke="#6B1E3A" stroke-width="1.2" fill="none"/>
+          <path d="M3 10 L25 10" stroke="#9B3A5A" stroke-width="0.6"/>
+          <circle cx="8" cy="8" r="1.5" fill="#B8935A"/>
+          <circle cx="20" cy="8" r="1.5" fill="#B8935A"/>
+          <path d="M8 14 L12 14 M8 18 L16 18" stroke="#9B3A5A" stroke-width="0.8"/>
+        </svg>
+      </div>
+      <h3 class="info-card-title">Mesa de regalos</h3>
+      <p class="info-card-text">
+        El mejor regalo es su presencia.<br><br>
+        Si desean hacernos un obsequio,
+        pueden hacerlo a través de nuestra
+        mesa de regalos o transferencia.
+      </p>
+      <div style="text-align:center;">
+        <a href="#" class="info-link">Ver mesa de regalos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONFIRMAR ASISTENCIA ═══ -->
+  <section class="rsvp-section">
+    <!-- Floral decoration -->
+    <svg width="160" height="50" viewBox="0 0 160 50" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 24px;opacity:0.6">
+      <path d="M80,25 Q60,8 40,18 Q32,25 40,32 Q60,42 80,25Z" fill="#C47A8A" opacity="0.5"/>
+      <path d="M80,25 Q100,8 120,18 Q128,25 120,32 Q100,42 80,25Z" fill="#C47A8A" opacity="0.5"/>
+      <circle cx="80" cy="25" r="5" fill="#6B1E3A" opacity="0.5"/>
+      <circle cx="14" cy="25" r="3.5" fill="#B8935A" opacity="0.5"/>
+      <circle cx="146" cy="25" r="3.5" fill="#B8935A" opacity="0.5"/>
+      <path d="M5,25 Q20,18 35,25" stroke="#9B3A5A" stroke-width="0.7" fill="none"/>
+      <path d="M155,25 Q140,18 125,25" stroke="#9B3A5A" stroke-width="0.7" fill="none"/>
+    </svg>
+
+    <p class="section-label">Confirmar asistencia</p>
+    <h2 class="section-title" style="margin-bottom:16px;">¿Nos acompañas?</h2>
+    <p class="rsvp-text">
+      Confirma tu asistencia antes del <strong>7 de octubre de 2026</strong>
+      para que podamos preparar todo con amor para recibirte.
+    </p>
+    <a href="https://wa.me/52" class="rsvp-btn">Confirmar asistencia</a>
+    <p class="rsvp-deadline">Fecha límite: 07 octubre 2026</p>
+  </section>
+
+  <!-- ═══ FOTO 4 ═══ -->
+  <div class="photo-section">
+    <img src="foto4.jpg" alt="Gabriela y Juan Carlos" class="photo-full"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="photo-placeholder" style="display:none;aspect-ratio:4/5;width:100%;">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="7" width="30" height="22" rx="2" stroke="#9B7A8A" stroke-width="1.2"/>
+        <circle cx="18" cy="18" r="6" stroke="#9B7A8A" stroke-width="1.2"/>
+        <circle cx="27" cy="11" r="2" fill="#9B7A8A"/>
+      </svg>
+      foto4.jpg
+    </div>
+  </div>
+
+  <!-- ═══ CIERRE ═══ -->
+  <section class="closing-section">
+    <svg width="160" height="60" viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 28px;opacity:0.5">
+      <path d="M80,30 Q60,10 40,20 Q30,30 40,40 Q60,50 80,30Z" fill="#C47A8A"/>
+      <path d="M80,30 Q100,10 120,20 Q130,30 120,40 Q100,50 80,30Z" fill="#C47A8A"/>
+      <circle cx="80" cy="30" r="6" fill="#D4AF75"/>
+      <circle cx="80" cy="30" r="3" fill="#FAF5EE" opacity="0.5"/>
+      <path d="M15,30 Q30,20 50,30" stroke="#9B3A5A" stroke-width="0.8" fill="none"/>
+      <path d="M145,30 Q130,20 110,30" stroke="#9B3A5A" stroke-width="0.8" fill="none"/>
+      <circle cx="10" cy="30" r="4" fill="#B8935A"/>
+      <circle cx="150" cy="30" r="4" fill="#B8935A"/>
+    </svg>
+
+    <p class="closing-quote">
+      "Dos son mejor que uno, porque tienen mejor recompensa de su esfuerzo."<br>
+      <span style="font-size:15px;opacity:0.7">— Eclesiastés 4:9</span>
+    </p>
+    <div style="height:1px;background:linear-gradient(to right,transparent,rgba(212,175,117,0.4),transparent);margin:28px 0;"></div>
+    <p class="closing-names">Gabriela & Juan Carlos</p>
+    <p class="closing-date">07 · 11 · 2026 · Aguascalientes</p>
+  </section>
+
+</div>
+
+<script>
+function updateCountdown() {
+  const target = new Date('2026-11-07T18:00:00-06:00');
+  const now = new Date();
+  const diff = target - now;
+
+  if (diff <= 0) {
+    document.getElementById('cd-dias').textContent = '000';
+    document.getElementById('cd-horas').textContent = '00';
+    document.getElementById('cd-min').textContent = '00';
+    document.getElementById('cd-seg').textContent = '00';
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById('cd-dias').textContent = String(days).padStart(3, '0');
+  document.getElementById('cd-horas').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cd-min').textContent = String(mins).padStart(2, '0');
+  document.getElementById('cd-seg').textContent = String(secs).padStart(2, '0');
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
 </body>
 </html>
