@@ -4,7 +4,7 @@ const SUPABASE_ANON_KEY = 'sb_publishable_61Gn8It1YJxEXel2Z_xLqw_ScRM8tC4';
 
 // ── CUENTA REGRESIVA ──
 function updateCountdown() {
-  const target = new Date('2026-11-07T18:00:00-06:00');
+  const target = new Date('2026-11-07T14:00:00-06:00');
   const now = new Date();
   const diff = target - now;
 
