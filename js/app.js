@@ -1,6 +1,6 @@
 // ── CONFIGURACIÓN SUPABASE ──
 const SUPABASE_URL     = 'https://zbwndyeozrpjrmltsdri.supabase.co/rest/v1';
-const SUPABASE_ANON_KEY = 'TU_ANON_KEY_AQUI';
+const SUPABASE_ANON_KEY = 'sb_publishable_61Gn8It1YJxEXel2Z_xLqw_ScRM8tC4';
 
 // ── CUENTA REGRESIVA ──
 function updateCountdown() {
@@ -100,11 +100,10 @@ async function submitRsvp(respuesta) {
     confirmo:       true,
     asistira:       respuesta === 'confirma',
     comentarios:    comentarios || null,
-    confirmado_el:  new Date().toISOString(),
+    confirmado_el:  new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString().replace('Z', '-06:00'),
   };
 
   try {
-    const SUPABASE_ANON_KEY = 'sb_publishable_61Gn8It1YJxEXel2Z_xLqw_ScRM8tC4';
     const res = await fetch(`${SUPABASE_URL}/invitados?id=eq.${guestId}`, {
       method: 'PATCH',
       headers: {
