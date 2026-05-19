@@ -123,13 +123,13 @@ async function submitRsvp(respuesta) {
     await fetch('https://ntfy.sh/Wedding_JC_Gabriela', {
       method: 'POST',
       headers: {
-        'Title':    asiste ? '✅ Confirmación de asistencia' : '❌ No podrá asistir',
+        'Title':    asiste ? 'Confirmacion de asistencia' : 'No podra asistir',
         'Priority': asiste ? 'default' : 'low',
         'Tags':     asiste ? 'white_check_mark,couple' : 'x,couple',
       },
       body: asiste
-        ? `${nombre} confirmó asistencia. ${tickets ? `Pases: ${tickets}.` : ''} ${comentarios ? `Comentario: "${comentarios}"` : ''}`.trim()
-        : `${nombre} no podrá asistir. ${comentarios ? `Comentario: "${comentarios}"` : ''}`.trim(),
+        ? `Confirma: ${nombre}. ${tickets ? `Pases: ${tickets}.` : ''} ${comentarios ? `Comentario: "${comentarios}"` : ''}`.trim()
+        : `No asistira: ${nombre}. ${comentarios ? `Comentario: "${comentarios}"` : ''}`.trim(),
     });
 
     document.getElementById('rsvp-modal').style.display = 'none';
