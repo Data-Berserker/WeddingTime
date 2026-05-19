@@ -125,11 +125,10 @@ async function submitRsvp(respuesta) {
       headers: {
         'Title':    asiste ? 'Confirmacion de asistencia' : 'No podra asistir',
         'Priority': asiste ? 'default' : 'low',
-        'Tags':     asiste ? 'white_check_mark,couple' : 'x,couple',
       },
       body: asiste
-        ? `Confirma: ${nombre}. ${tickets ? `Pases: ${tickets}.` : ''} ${comentarios ? `Comentario: "${comentarios}"` : ''}`.trim()
-        : `No asistira: ${nombre}. ${comentarios ? `Comentario: "${comentarios}"` : ''}`.trim(),
+        ? `Confirma: ${nombre}. ${tickets ? `Pases: ${tickets}.` : ''} ${comentarios ? `Comentario: ${comentarios}` : ''}`.trim()
+        : `No asistira: ${nombre}. ${comentarios ? `Comentario: ${comentarios}` : ''}`.trim(),
     });
 
     document.getElementById('rsvp-modal').style.display = 'none';
