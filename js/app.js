@@ -40,3 +40,49 @@ if (invitado) {
   const rsvpTitle = document.getElementById('rsvp-title');
   if (rsvpTitle) rsvpTitle.textContent = `¿Nos acompañas, ${invitado}?`;
 }
+
+// ── MODAL RSVP ──
+function openRsvpModal() {
+  const modal = document.getElementById('rsvp-modal');
+  const guestName = document.getElementById('modal-guest-name');
+  guestName.textContent = invitado || 'Invitado';
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeRsvpModal(event) {
+  // Cierra solo si se hace click en el fondo oscuro o en el botón X
+  if (event && event.target !== document.getElementById('rsvp-modal')) return;
+  document.getElementById('rsvp-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function submitRsvp(respuesta) {
+  const comentarios = document.getElementById('modal-comments').value.trim();
+
+  const datos = {
+    invitado: invitado || 'Invitado',
+    respuesta,          // 'confirma' | 'ausencia'
+    comentarios,
+    fecha: new Date().toISOString(),
+  };
+
+  console.log('RSVP:', datos);
+
+  // TODO: reemplazar con llamada a tu API
+  // fetch('https://tu-api.com/rsvp', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify(datos),
+  // });
+
+  // Cierra el modal y muestra confirmación
+  document.getElementById('rsvp-modal').style.display = 'none';
+  document.body.style.overflow = '';
+
+  const mensaje = respuesta === 'confirma'
+    ? `¡Gracias, ${datos.invitado}! Tu asistencia ha sido confirmada. 🎉`
+    : `Gracias por avisarnos, ${datos.invitado}. ¡Los tendremos en nuestros corazones!`;
+
+  alert(mensaje);
+}

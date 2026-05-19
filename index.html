@@ -377,9 +377,29 @@
       Confirma tu asistencia antes del <strong>7 de octubre de 2026</strong>
       para que podamos preparar todo con amor para recibirte.
     </p>
-    <a href="https://wa.me/52" class="rsvp-btn">Confirmar asistencia</a>
+    <button class="rsvp-btn" onclick="openRsvpModal()">Confirmar asistencia</button>
     <p class="rsvp-deadline">Fecha límite: 07 octubre 2026</p>
   </section>
+
+  <!-- ═══ MODAL RSVP ═══ -->
+  <div id="rsvp-modal" style="display:none;" onclick="closeRsvpModal(event)">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeRsvpModal()">&times;</button>
+
+      <p class="modal-label">Confirmación de asistencia</p>
+      <h3 class="modal-name" id="modal-guest-name">Invitado</h3>
+
+      <div class="modal-divider"></div>
+
+      <p class="modal-field-label">Comentarios <span style="opacity:0.5">(opcional)</span></p>
+      <textarea id="modal-comments" class="modal-textarea" placeholder="Restricciones alimentarias, mensaje para los novios..."></textarea>
+
+      <div class="modal-actions">
+        <button class="modal-btn confirm" onclick="submitRsvp('confirma')">✓ &nbsp;Confirmo asistencia</button>
+        <button class="modal-btn decline" onclick="submitRsvp('ausencia')">✗ &nbsp;No podré asistir</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══ FOTO 4 ═══ -->
   <div class="photo-section">

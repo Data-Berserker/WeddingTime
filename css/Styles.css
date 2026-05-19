@@ -667,3 +667,117 @@ body {
   text-transform: uppercase;
 }
 .photo-placeholder svg { opacity: 0.35; }
+
+/* ── MODAL RSVP ── */
+#rsvp-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 13, 20, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+}
+
+.modal-box {
+  background: var(--cream);
+  max-width: 400px;
+  width: 100%;
+  padding: 36px 28px 28px;
+  position: relative;
+  border: 0.5px solid var(--rose);
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--text-light);
+  cursor: pointer;
+  line-height: 1;
+}
+.modal-close:hover { color: var(--burgundy); }
+
+.modal-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.modal-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--burgundy-dark);
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.modal-divider {
+  height: 0.5px;
+  background: linear-gradient(to right, transparent, var(--rose), transparent);
+  margin: 20px 0;
+}
+
+.modal-field-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.modal-textarea {
+  width: 100%;
+  height: 90px;
+  border: 0.5px solid var(--rose);
+  background: var(--cream-dark);
+  padding: 10px 12px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  color: var(--text-dark);
+  resize: none;
+  outline: none;
+  margin-bottom: 20px;
+}
+.modal-textarea::placeholder { color: var(--text-light); }
+.modal-textarea:focus { border-color: var(--burgundy); }
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-btn {
+  width: 100%;
+  padding: 13px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.modal-btn:hover { opacity: 0.85; }
+
+.modal-btn.confirm {
+  background: var(--burgundy);
+  color: #fff;
+}
+
+.modal-btn.decline {
+  background: transparent;
+  border: 1px solid var(--text-light);
+  color: var(--text-mid);
+}
