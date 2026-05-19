@@ -1,3 +1,7 @@
+// ── CONFIGURACIÓN SUPABASE ──
+const SUPABASE_URL     = 'https://zbwndyeozrpjrmltsdri.supabase.co/rest/v1';
+const SUPABASE_ANON_KEY = 'TU_ANON_KEY_AQUI';
+
 // ── CUENTA REGRESIVA ──
 function updateCountdown() {
   const target = new Date('2026-11-07T18:00:00-06:00');
@@ -26,28 +30,25 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ── INVITADOS ──
-// Un invitado:   ?invitado1=Rocio%20Hernandez&tickets=1
-// Dos invitados: ?invitado1=Rocio%20Hernandez&invitado2=Arturo%20Lopez&tickets=2
+// ── PARÁMETROS DEL URL ──
+// Ejemplo: ?id=UUID&invitado1=Irma%20Dolores&invitado2=Jose%20Manuel&tickets=2
 const params    = new URLSearchParams(window.location.search);
+const guestId   = params.get('id')        ? decodeURIComponent(params.get('id'))        : null;
 const invitado1 = params.get('invitado1') ? decodeURIComponent(params.get('invitado1')) : null;
 const invitado2 = params.get('invitado2') ? decodeURIComponent(params.get('invitado2')) : null;
-const tickets   = params.get('tickets')   ? parseInt(params.get('tickets'), 10) : null;
+const tickets   = params.get('tickets')   ? parseInt(params.get('tickets'), 10)         : null;
 
-// Nombre para mostrar en textos: "Rocio" o "Rocio y Arturo"
+// Nombre compuesto para mostrar en textos
 const nombreMostrado = invitado1
   ? (invitado2 ? `${invitado1} y ${invitado2}` : invitado1)
   : null;
 
-// Pronombre plural o singular
 const esPlural = !!invitado2;
 
 if (nombreMostrado) {
-  // Portada
   const coverInvite = document.getElementById('cover-invite');
   if (coverInvite) coverInvite.textContent = `¡Hola, ${nombreMostrado}!`;
 
-  // RSVP título
   const rsvpTitle = document.getElementById('rsvp-title');
   if (rsvpTitle) rsvpTitle.textContent = esPlural
     ? `¿Nos acompañan, ${nombreMostrado}?`
@@ -58,11 +59,9 @@ if (nombreMostrado) {
 function openRsvpModal() {
   const modal = document.getElementById('rsvp-modal');
 
-  // Nombre(s) en el modal
   document.getElementById('modal-guest-name').textContent =
     nombreMostrado || 'Invitado';
 
-  // Tickets — muestra la fila solo si viene el parámetro
   const ticketsRow = document.getElementById('modal-tickets-row');
   const ticketsVal = document.getElementById('modal-tickets-value');
   if (ticketsRow && ticketsVal) {
@@ -74,7 +73,6 @@ function openRsvpModal() {
     }
   }
 
-  // Adapta el texto del botón de confirmación
   const confirmBtn = document.getElementById('modal-confirm-btn');
   if (confirmBtn) confirmBtn.textContent = esPlural
     ? '✓   Confirmamos asistencia'
@@ -90,42 +88,54 @@ function closeRsvpModal(event) {
   document.body.style.overflow = '';
 }
 
-function submitRsvp(respuesta) {
+async function submitRsvp(respuesta) {
+  if (!guestId) {
+    alert('No se encontró el identificador del invitado. Verifica el link de tu invitación.');
+    return;
+  }
+
   const comentarios = document.getElementById('modal-comments').value.trim();
 
-  const datos = {
-    invitado1: invitado1 || 'Invitado',
-    invitado2: invitado2 || null,
-    tickets:   tickets   || null,
-    respuesta,   // 'confirma' | 'ausencia'
-    comentarios,
-    fecha: new Date().toISOString(),
+  const payload = {
+    confirmo:       true,
+    asistira:       respuesta === 'confirma',
+    comentarios:    comentarios || null,
+    confirmado_el:  new Date().toISOString(),
   };
 
-  console.log('RSVP:', datos);
+  try {
+    const SUPABASE_ANON_KEY = 'sb_publishable_61Gn8It1YJxEXel2Z_xLqw_ScRM8tC4';
+    const res = await fetch(`${SUPABASE_URL}/invitados?id=eq.${guestId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type':  'application/json',
+        'apikey':        SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer':        'return=minimal',
+      },
+      body: JSON.stringify(payload),
+    });
 
-  // TODO: reemplazar con llamada a Supabase
-  // fetch('https://tu-proyecto.supabase.co/rest/v1/rsvp', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'apikey': 'TU_ANON_KEY',
-  //     'Authorization': 'Bearer TU_ANON_KEY',
-  //   },
-  //   body: JSON.stringify(datos),
-  // });
+    document.getElementById('rsvp-modal').style.display = 'none';
+    document.body.style.overflow = '';
 
-  document.getElementById('rsvp-modal').style.display = 'none';
-  document.body.style.overflow = '';
-
-  const nombre = nombreMostrado || 'Invitado';
-  const mensaje = respuesta === 'confirma'
-    ? (esPlural
-        ? `¡Gracias, ${nombre}! Su asistencia ha sido confirmada. 🎉`
-        : `¡Gracias, ${nombre}! Tu asistencia ha sido confirmada. 🎉`)
-    : (esPlural
-        ? `Gracias por avisarnos, ${nombre}. ¡Los tendremos en nuestros corazones!`
-        : `Gracias por avisarnos, ${nombre}. ¡Te tendremos en nuestros corazones!`);
-
-  alert(mensaje);
+    if (res.ok) {
+      const nombre = nombreMostrado || 'Invitado';
+      const mensaje = respuesta === 'confirma'
+        ? (esPlural
+            ? `¡Gracias, ${nombre}! Su asistencia ha sido confirmada. 🎉`
+            : `¡Gracias, ${nombre}! Tu asistencia ha sido confirmada. 🎉`)
+        : (esPlural
+            ? `Gracias por avisarnos, ${nombre}. ¡Los tendremos en nuestros corazones!`
+            : `Gracias por avisarnos, ${nombre}. ¡Te tendremos en nuestros corazones!`);
+      alert(mensaje);
+    } else {
+      const err = await res.json();
+      console.error('Supabase error:', err);
+      alert('Hubo un problema al guardar tu confirmación. Por favor intenta de nuevo.');
+    }
+  } catch (e) {
+    console.error('Error de red:', e);
+    alert('No se pudo conectar. Verifica tu conexión e intenta de nuevo.');
+  }
 }
