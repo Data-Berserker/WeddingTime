@@ -26,32 +26,65 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ── NOMBRE DEL INVITADO ──
-// Uso: ?invitado=Rocio%20y%20Arturo
-const params   = new URLSearchParams(window.location.search);
-const invitado = params.get('invitado')
-  ? decodeURIComponent(params.get('invitado'))
+// ── INVITADOS ──
+// Un invitado:   ?invitado1=Rocio%20Hernandez&tickets=1
+// Dos invitados: ?invitado1=Rocio%20Hernandez&invitado2=Arturo%20Lopez&tickets=2
+const params    = new URLSearchParams(window.location.search);
+const invitado1 = params.get('invitado1') ? decodeURIComponent(params.get('invitado1')) : null;
+const invitado2 = params.get('invitado2') ? decodeURIComponent(params.get('invitado2')) : null;
+const tickets   = params.get('tickets')   ? parseInt(params.get('tickets'), 10) : null;
+
+// Nombre para mostrar en textos: "Rocio" o "Rocio y Arturo"
+const nombreMostrado = invitado1
+  ? (invitado2 ? `${invitado1} y ${invitado2}` : invitado1)
   : null;
 
-if (invitado) {
-  const coverInvite = document.getElementById('cover-invite');
-  if (coverInvite) coverInvite.textContent = `¡Hola, ${invitado}!`;
+// Pronombre plural o singular
+const esPlural = !!invitado2;
 
+if (nombreMostrado) {
+  // Portada
+  const coverInvite = document.getElementById('cover-invite');
+  if (coverInvite) coverInvite.textContent = `¡Hola, ${nombreMostrado}!`;
+
+  // RSVP título
   const rsvpTitle = document.getElementById('rsvp-title');
-  if (rsvpTitle) rsvpTitle.textContent = `¿Nos acompañas, ${invitado}?`;
+  if (rsvpTitle) rsvpTitle.textContent = esPlural
+    ? `¿Nos acompañan, ${nombreMostrado}?`
+    : `¿Nos acompañas, ${nombreMostrado}?`;
 }
 
 // ── MODAL RSVP ──
 function openRsvpModal() {
   const modal = document.getElementById('rsvp-modal');
-  const guestName = document.getElementById('modal-guest-name');
-  guestName.textContent = invitado || 'Invitado';
+
+  // Nombre(s) en el modal
+  document.getElementById('modal-guest-name').textContent =
+    nombreMostrado || 'Invitado';
+
+  // Tickets — muestra la fila solo si viene el parámetro
+  const ticketsRow = document.getElementById('modal-tickets-row');
+  const ticketsVal = document.getElementById('modal-tickets-value');
+  if (ticketsRow && ticketsVal) {
+    if (tickets) {
+      ticketsVal.textContent = `${tickets} lugar${tickets > 1 ? 'es' : ''} reservado${tickets > 1 ? 's' : ''}`;
+      ticketsRow.style.display = 'block';
+    } else {
+      ticketsRow.style.display = 'none';
+    }
+  }
+
+  // Adapta el texto del botón de confirmación
+  const confirmBtn = document.getElementById('modal-confirm-btn');
+  if (confirmBtn) confirmBtn.textContent = esPlural
+    ? '✓   Confirmamos asistencia'
+    : '✓   Confirmo asistencia';
+
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
 
 function closeRsvpModal(event) {
-  // Cierra solo si se hace click en el fondo oscuro o en el botón X
   if (event && event.target !== document.getElementById('rsvp-modal')) return;
   document.getElementById('rsvp-modal').style.display = 'none';
   document.body.style.overflow = '';
@@ -61,28 +94,38 @@ function submitRsvp(respuesta) {
   const comentarios = document.getElementById('modal-comments').value.trim();
 
   const datos = {
-    invitado: invitado || 'Invitado',
-    respuesta,          // 'confirma' | 'ausencia'
+    invitado1: invitado1 || 'Invitado',
+    invitado2: invitado2 || null,
+    tickets:   tickets   || null,
+    respuesta,   // 'confirma' | 'ausencia'
     comentarios,
     fecha: new Date().toISOString(),
   };
 
   console.log('RSVP:', datos);
 
-  // TODO: reemplazar con llamada a tu API
-  // fetch('https://tu-api.com/rsvp', {
+  // TODO: reemplazar con llamada a Supabase
+  // fetch('https://tu-proyecto.supabase.co/rest/v1/rsvp', {
   //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'apikey': 'TU_ANON_KEY',
+  //     'Authorization': 'Bearer TU_ANON_KEY',
+  //   },
   //   body: JSON.stringify(datos),
   // });
 
-  // Cierra el modal y muestra confirmación
   document.getElementById('rsvp-modal').style.display = 'none';
   document.body.style.overflow = '';
 
+  const nombre = nombreMostrado || 'Invitado';
   const mensaje = respuesta === 'confirma'
-    ? `¡Gracias, ${datos.invitado}! Tu asistencia ha sido confirmada. 🎉`
-    : `Gracias por avisarnos, ${datos.invitado}. ¡Los tendremos en nuestros corazones!`;
+    ? (esPlural
+        ? `¡Gracias, ${nombre}! Su asistencia ha sido confirmada. 🎉`
+        : `¡Gracias, ${nombre}! Tu asistencia ha sido confirmada. 🎉`)
+    : (esPlural
+        ? `Gracias por avisarnos, ${nombre}. ¡Los tendremos en nuestros corazones!`
+        : `Gracias por avisarnos, ${nombre}. ¡Te tendremos en nuestros corazones!`);
 
   alert(mensaje);
 }

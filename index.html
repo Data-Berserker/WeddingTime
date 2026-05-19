@@ -388,6 +388,9 @@
 
       <p class="modal-label">Confirmación de asistencia</p>
       <h3 class="modal-name" id="modal-guest-name">Invitado</h3>
+      <p id="modal-tickets-row" class="modal-tickets" style="display:none;">
+        <span id="modal-tickets-value"></span>
+      </p>
 
       <div class="modal-divider"></div>
 
@@ -395,7 +398,7 @@
       <textarea id="modal-comments" class="modal-textarea" placeholder="Restricciones alimentarias, mensaje para los novios..."></textarea>
 
       <div class="modal-actions">
-        <button class="modal-btn confirm" onclick="submitRsvp('confirma')">✓ &nbsp;Confirmo asistencia</button>
+        <button id="modal-confirm-btn" class="modal-btn confirm" onclick="submitRsvp('confirma')">✓ &nbsp;Confirmo asistencia</button>
         <button class="modal-btn decline" onclick="submitRsvp('ausencia')">✗ &nbsp;No podré asistir</button>
       </div>
     </div>

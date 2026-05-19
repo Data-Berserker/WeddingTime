@@ -722,6 +722,15 @@ body {
   margin-bottom: 0;
 }
 
+.modal-tickets {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+  margin-top: 8px;
+}
+
 .modal-divider {
   height: 0.5px;
   background: linear-gradient(to right, transparent, var(--rose), transparent);
