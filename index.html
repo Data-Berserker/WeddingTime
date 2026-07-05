@@ -73,8 +73,8 @@
     </section>
 
     <section class="rsvp-section" id="confirmar-asistencia">
-      <p class="rsvp-invite">Nos complace invitarte a nuestra boda</p>
-      <button type="button" class="rsvp-btn">Confirma tu asistencia</button>
+      <p class="rsvp-invite" id="rsvp-invite">Nos complace invitarte a nuestra boda</p>
+      <button type="button" class="rsvp-btn" id="rsvp-btn">Confirma tu asistencia</button>
     </section>
 
     <section class="parents-section" id="nuestros-padres">
@@ -250,6 +250,13 @@
           <p class="dresscode-note">(No blanco, colores<br>claros o estampados)</p>
         </div>
       </div>
+
+      <a
+        href="https://pin.it/22w87rQB9"
+        class="dresscode-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Ver inspiración en Pinterest</a>
     </section>
 
     <section class="photo-full-section" aria-label="Foto de la pareja">
@@ -336,6 +343,38 @@
       </div>
     </section>
   </main>
+
+  <div class="rsvp-modal" id="rsvp-modal" hidden>
+    <div class="rsvp-modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-guest-name">
+      <button type="button" class="rsvp-modal-close" id="rsvp-modal-close" aria-label="Cerrar">&times;</button>
+
+      <p class="rsvp-modal-label">Confirmación de asistencia</p>
+      <h3 class="rsvp-modal-name" id="modal-guest-name">Invitado</h3>
+      <p class="rsvp-modal-tickets" id="modal-tickets-row" hidden>
+        <span id="modal-tickets-value"></span>
+      </p>
+
+      <div class="rsvp-modal-divider" aria-hidden="true"></div>
+
+      <label class="rsvp-modal-field-label" for="modal-comments">
+        Comentarios <span class="rsvp-modal-optional">(opcional)</span>
+      </label>
+      <textarea
+        id="modal-comments"
+        class="rsvp-modal-textarea"
+        placeholder="Restricciones alimentarias, mensaje para los novios..."
+      ></textarea>
+
+      <div class="rsvp-modal-actions">
+        <button type="button" class="rsvp-modal-btn rsvp-modal-btn--confirm" id="modal-confirm-btn">
+          Confirmo asistencia
+        </button>
+        <button type="button" class="rsvp-modal-btn rsvp-modal-btn--decline" id="modal-decline-btn">
+          No podré asistir
+        </button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/app.js"></script>
 </body>

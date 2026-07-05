@@ -85,6 +85,7 @@
 
   initGallery();
   initGuestbook();
+  initRsvp();
 })();
 
 function galleryImagePath(filename) {
@@ -93,29 +94,16 @@ function galleryImagePath(filename) {
 
 function initGallery() {
   var GALLERY_FILES = [
-    'GABY&CARLOS.jpg', 'GABY&CARLOS2.jpg', 'GABY&CARLOS4.jpg', 'GABY&CARLOS5.jpg',
-    'GABY&CARLOS6.jpg', 'GABY&CARLOS7.jpg', 'GABY&CARLOS8.jpg', 'GABY&CARLOS9.jpg',
-    'GABY&CARLOS10.jpg', 'GABY&CARLOS11.jpg', 'GABY&CARLOS13.jpg', 'GABY&CARLOS14.jpg',
-    'GABY&CARLOS15.jpg', 'GABY&CARLOS16.jpg', 'GABY&CARLOS17.jpg', 'GABY&CARLOS18.jpg',
-    'GABY&CARLOS19.jpg', 'GABY&CARLOS20.jpg', 'GABY&CARLOS21.jpg', 'GABY&CARLOS22.jpg',
-    'GABY&CARLOS23.jpg', 'GABY&CARLOS24.jpg', 'GABY&CARLOS25.jpg', 'GABY&CARLOS26.jpg',
-    'GABY&CARLOS27.jpg', 'GABY&CARLOS28.jpg', 'GABY&CARLOS29.jpg', 'GABY&CARLOS30.jpg',
-    'GABY&CARLOS31.jpg', 'GABY&CARLOS32.jpg', 'GABY&CARLOS33.jpg', 'GABY&CARLOS34.jpg',
-    'GABY&CARLOS35.jpg', 'GABY&CARLOS36.jpg', 'GABY&CARLOS37.jpg', 'GABY&CARLOS38.jpg',
-    'GABY&CARLOS39.jpg', 'GABY&CARLOS40.jpg', 'GABY&CARLOS41.jpg', 'GABY&CARLOS42.jpg',
-    'GABY&CARLOS43.jpg', 'GABY&CARLOS44.jpg', 'GABY&CARLOS45.jpg', 'GABY&CARLOS46.jpg',
-    'GABY&CARLOS47.jpg', 'GABY&CARLOS48.jpg', 'GABY&CARLOS49.jpg', 'GABY&CARLOS50.jpg',
-    'GABY&CARLOS51.jpg', 'GABY&CARLOS52.jpg', 'GABY&CARLOS53.jpg', 'GABY&CARLOS54.jpg',
-    'GABY&CARLOS55.jpg', 'GABY&CARLOS56.jpg', 'GABY&CARLOS57.jpg', 'GABY&CARLOS58.jpg',
-    'GABY&CARLOS59.jpg', 'GABY&CARLOS60.jpg', 'GABY&CARLOS61.jpg', 'GABY&CARLOS62.jpg',
-    'GABY&CARLOS63.jpg', 'GABY&CARLOS64.jpg', 'GABY&CARLOS65.jpg', 'GABY&CARLOS66.jpg',
-    'GABY&CARLOS67.jpg', 'GABY&CARLOS68.jpg', 'GABY&CARLOS69.jpg', 'GABY&CARLOS70.jpg',
-    'GABY&CARLOS71.jpg', 'GABY&CARLOS72.jpg', 'GABY&CARLOS73.jpg', 'GABY&CARLOS74.jpg',
-    'GABY&CARLOS75.jpg', 'GABY&CARLOS76.jpg', 'GABY&CARLOS77.jpg', 'GABY&CARLOS78.jpg',
-    'GABY&CARLOS79.jpg', 'GABY&CARLOS80.jpg', 'GABY&CARLOS82.jpg', 'GABY&CARLOS83.jpg',
-    'GABY&CARLOS84.jpg', 'GABY&CARLOS85.jpg', 'GABY&CARLOS86.jpg', 'GABY&CARLOS87.jpg',
-    'GABY&CARLOS88.jpg', 'GABY&CARLOS89.jpg', 'GABY&CARLOS90.jpg', 'GABY&CARLOS91.jpg',
-    'GABY&CARLOS92.jpg', 'GABY&CARLOS93.jpg', 'GABY&CARLOS94.jpg', 'GABY&CARLOS95.jpg'
+    'GABY&CARLOS.jpg',
+    'GABY&CARLOS10.jpg',
+    'GABY&CARLOS22.jpg',
+    'GABY&CARLOS33.jpg',
+    'GABY&CARLOS44.jpg',
+    'GABY&CARLOS55.jpg',
+    'GABY&CARLOS66.jpg',
+    'GABY&CARLOS75.jpg',
+    'GABY&CARLOS85.jpg',
+    'GABY&CARLOS95.jpg'
   ];
 
   var trackEl = document.getElementById('gallery-track');
@@ -279,5 +267,171 @@ function initGuestbook() {
 
     form.hidden = true;
     successEl.hidden = false;
+  });
+}
+
+function initRsvp() {
+  var SUPABASE_URL = 'https://zbwndyeozrpjrmltsdri.supabase.co/rest/v1';
+  var SUPABASE_ANON_KEY = 'sb_publishable_61Gn8It1YJxEXel2Z_xLqw_ScRM8tC4';
+  var NTFY_TOPIC = 'Wedding_JC_Gabriela';
+
+  var params = new URLSearchParams(window.location.search);
+  var guestId = params.get('id') ? decodeURIComponent(params.get('id')) : null;
+  var invitado1 = params.get('invitado1') ? decodeURIComponent(params.get('invitado1')) : null;
+  var invitado2 = params.get('invitado2') ? decodeURIComponent(params.get('invitado2')) : null;
+  var tickets = params.get('tickets') ? parseInt(params.get('tickets'), 10) : null;
+
+  var nombreMostrado = invitado1
+    ? (invitado2 ? invitado1 + ' y ' + invitado2 : invitado1)
+    : null;
+  var esPlural = !!invitado2;
+
+  var modal = document.getElementById('rsvp-modal');
+  var rsvpBtn = document.getElementById('rsvp-btn');
+  var rsvpInvite = document.getElementById('rsvp-invite');
+  var closeBtn = document.getElementById('rsvp-modal-close');
+  var confirmBtn = document.getElementById('modal-confirm-btn');
+  var declineBtn = document.getElementById('modal-decline-btn');
+  var guestNameEl = document.getElementById('modal-guest-name');
+  var ticketsRow = document.getElementById('modal-tickets-row');
+  var ticketsVal = document.getElementById('modal-tickets-value');
+  var commentsEl = document.getElementById('modal-comments');
+
+  if (!modal || !rsvpBtn) {
+    return;
+  }
+
+  if (nombreMostrado && rsvpInvite) {
+    rsvpInvite.textContent = esPlural
+      ? 'Nos complace invitarlos a nuestra boda, ' + nombreMostrado
+      : 'Nos complace invitarte a nuestra boda, ' + nombreMostrado;
+  }
+
+  function openRsvpModal() {
+    guestNameEl.textContent = nombreMostrado || 'Invitado';
+
+    if (tickets && ticketsRow && ticketsVal) {
+      ticketsVal.textContent = tickets + ' lugar' + (tickets > 1 ? 'es' : '') + ' reservado' + (tickets > 1 ? 's' : '');
+      ticketsRow.hidden = false;
+    } else if (ticketsRow) {
+      ticketsRow.hidden = true;
+    }
+
+    if (confirmBtn) {
+      confirmBtn.textContent = esPlural ? 'Confirmamos asistencia' : 'Confirmo asistencia';
+    }
+
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    commentsEl.value = '';
+    commentsEl.focus();
+  }
+
+  function closeRsvpModal() {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  function showMessage(message) {
+    window.alert(message);
+  }
+
+  function submitRsvp(respuesta) {
+    if (!guestId) {
+      showMessage('No se encontró el identificador del invitado. Verifica el link de tu invitación.');
+      return;
+    }
+
+    var comentarios = commentsEl.value.trim();
+    var nombre = nombreMostrado || 'Invitado';
+    var payload = {
+      confirmo: true,
+      asistira: respuesta === 'confirma',
+      comentarios: comentarios || null,
+      confirmado_el: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString().replace('Z', '-06:00')
+    };
+
+    confirmBtn.disabled = true;
+    declineBtn.disabled = true;
+
+    fetch(SUPABASE_URL + '/invitados?id=eq.' + guestId, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(function (res) {
+        var asiste = respuesta === 'confirma';
+        var ntfyBody = asiste
+          ? nombre + ' confirmó asistencia.' + (tickets ? ' Pases: ' + tickets + '.' : '') + (comentarios ? ' Comentario: "' + comentarios + '"' : '')
+          : nombre + ' no podrá asistir.' + (comentarios ? ' Comentario: "' + comentarios + '"' : '');
+
+        return fetch('https://ntfy.sh/' + NTFY_TOPIC, {
+          method: 'POST',
+          headers: {
+            'Title': asiste ? 'Confirmación de asistencia' : 'No podrá asistir',
+            'Priority': asiste ? 'default' : 'low',
+            'Tags': asiste ? 'white_check_mark,couple' : 'x,couple'
+          },
+          body: ntfyBody.trim()
+        }).then(function () {
+          return res;
+        });
+      })
+      .then(function (res) {
+        closeRsvpModal();
+
+        if (res.ok) {
+          if (respuesta === 'confirma') {
+            showMessage(esPlural
+              ? '¡Gracias, ' + nombre + '! Su asistencia ha sido confirmada.'
+              : '¡Gracias, ' + nombre + '! Tu asistencia ha sido confirmada.');
+          } else {
+            showMessage(esPlural
+              ? 'Gracias por avisarnos, ' + nombre + '. ¡Los tendremos en nuestros corazones!'
+              : 'Gracias por avisarnos, ' + nombre + '. ¡Te tendremos en nuestros corazones!');
+          }
+        } else {
+          return res.json().then(function (err) {
+            console.error('Supabase error:', err);
+            showMessage('Hubo un problema al guardar tu confirmación. Por favor intenta de nuevo.');
+          });
+        }
+      })
+      .catch(function (e) {
+        console.error('Error de red:', e);
+        showMessage('No se pudo conectar. Verifica tu conexión e intenta de nuevo.');
+      })
+      .finally(function () {
+        confirmBtn.disabled = false;
+        declineBtn.disabled = false;
+      });
+  }
+
+  rsvpBtn.addEventListener('click', openRsvpModal);
+  closeBtn.addEventListener('click', closeRsvpModal);
+
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) {
+      closeRsvpModal();
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !modal.hidden) {
+      closeRsvpModal();
+    }
+  });
+
+  confirmBtn.addEventListener('click', function () {
+    submitRsvp('confirma');
+  });
+
+  declineBtn.addEventListener('click', function () {
+    submitRsvp('ausencia');
   });
 }

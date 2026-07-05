@@ -278,6 +278,160 @@ ul {
   opacity: 0.88;
 }
 
+/* ── Modal RSVP ── */
+.rsvp-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(26, 26, 26, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+.rsvp-modal[hidden] {
+  display: none;
+}
+
+.rsvp-modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  padding: 40px 32px 32px;
+  background: var(--white);
+  border: 1px solid rgba(205, 179, 149, 0.45);
+  text-align: center;
+}
+
+.rsvp-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  padding: 4px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.rsvp-modal-close:hover {
+  color: var(--black);
+}
+
+.rsvp-modal-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--tan);
+  margin-bottom: 10px;
+}
+
+.rsvp-modal-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 5vw, 30px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--black);
+  line-height: 1.3;
+}
+
+.rsvp-modal-tickets {
+  margin-top: 10px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--tan);
+}
+
+.rsvp-modal-divider {
+  width: 48px;
+  height: 1px;
+  margin: 24px auto;
+  background: rgba(205, 179, 149, 0.65);
+}
+
+.rsvp-modal-field-label {
+  display: block;
+  margin-bottom: 10px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.rsvp-modal-optional {
+  opacity: 0.55;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.rsvp-modal-textarea {
+  width: 100%;
+  height: 96px;
+  margin-bottom: 24px;
+  padding: 12px 14px;
+  border: 1px solid rgba(205, 179, 149, 0.5);
+  background: rgba(255, 255, 255, 0.8);
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  color: var(--black);
+  resize: vertical;
+  outline: none;
+}
+
+.rsvp-modal-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.rsvp-modal-textarea:focus {
+  border-color: var(--tan);
+}
+
+.rsvp-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rsvp-modal-btn {
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease;
+}
+
+.rsvp-modal-btn:hover {
+  opacity: 0.88;
+}
+
+.rsvp-modal-btn--confirm {
+  background: var(--tan);
+  color: var(--white);
+}
+
+.rsvp-modal-btn--decline {
+  background: transparent;
+  border: 1px solid rgba(85, 85, 85, 0.35);
+  color: var(--text-muted);
+}
+
 /* ── Cajas de acento (padres y padrinos) ── */
 .parents-section,
 .padrinos-section {
@@ -633,6 +787,24 @@ ul {
   font-weight: 300;
   color: var(--text-muted);
   line-height: 1.5;
+}
+
+.dresscode-btn {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 16px 36px;
+  background: var(--tan);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white);
+  transition: opacity 0.2s ease;
+}
+
+.dresscode-btn:hover {
+  opacity: 0.88;
 }
 
 .photo-full-section {
