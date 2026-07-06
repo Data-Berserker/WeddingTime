@@ -1,0 +1,101 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - Work_In_Progress
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare deploy artifact
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+
+          files=(
+            index.html
+            css/Styles.css
+            js/app.js
+            .nojekyll
+            Assets/icons/church.webp
+            Assets/icons/rings.png
+            Assets/icons/cup.webp
+            Assets/icons/fork_and_spoon.webp
+            Assets/icons/music-note.webp
+            Assets/icons/end.png
+            Assets/icons/DRESSCODE.png
+            Assets/images/foto4.jpg
+            Assets/images/GABY&CARLOS18.jpg
+            Assets/images/GABY&CARLOS65.jpg
+            Assets/images/GABY&CARLOS75.jpg
+            Assets/images/Marble_Background.png
+            Assets/images/GABY&CARLOS.jpg
+            Assets/images/GABY&CARLOS10.jpg
+            Assets/images/GABY&CARLOS22.jpg
+            Assets/images/GABY&CARLOS33.jpg
+            Assets/images/GABY&CARLOS44.jpg
+            Assets/images/GABY&CARLOS55.jpg
+            Assets/images/GABY&CARLOS66.jpg
+            Assets/images/GABY&CARLOS85.jpg
+            Assets/images/GABY&CARLOS95.jpg
+          )
+
+          for file in "${files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "Missing required file: $file"
+              exit 1
+            fi
+            mkdir -p "_site/$(dirname "$file")"
+            cp "$file" "_site/$file"
+          done
+
+          echo "Deploy artifact size:"
+          du -sh _site
+          find _site -type f | wc -l | xargs echo "Files:"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment-retry.outputs.page_url || steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Retry deploy to GitHub Pages
+        if: steps.deployment.outcome == 'failure'
+        id: deployment-retry
+        uses: actions/deploy-pages@v4
+
+      - name: Verify deployment succeeded
+        if: steps.deployment.outcome == 'failure' && steps.deployment-retry.outcome == 'failure'
+        run: |
+          echo "GitHub Pages deployment failed after 2 attempts."
+          exit 1
