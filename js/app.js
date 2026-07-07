@@ -276,7 +276,7 @@ function initGuestbook() {
       submitBtn.disabled = true;
     }
 
-    fetch(SUPABASE_URL + '/messages', {
+    fetch(SUPABASE_URL + '/Messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
