@@ -31,7 +31,7 @@ jobs:
           files=(
             index.html
             css/Styles.css
-            js/app.js
+            js/wedding.js
             .nojekyll
             Assets/icons/church.webp
             Assets/icons/rings.png
