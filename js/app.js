@@ -90,6 +90,7 @@
 
 var SUPABASE_URL = 'https://zbwndyeozrpjrmltsdri.supabase.co/rest/v1';
 var SUPABASE_ANON_KEY = 'sb_publishable_61Gn8It1YJxEXel2Z_xLqw_ScRM8tC4';
+var NTFY_TOPIC = 'Wedding_JC_Gabriela';
 
 function galleryImagePath(filename) {
   return 'Assets/images/' + filename.replace(/&/g, '%26');
@@ -296,6 +297,21 @@ function initGuestbook() {
           });
         }
 
+        var preview = message.length > 120 ? message.slice(0, 117) + '...' : message;
+
+        return fetch('https://ntfy.sh/' + NTFY_TOPIC, {
+          method: 'POST',
+          headers: {
+            'Title': 'Nuevo mensaje en el libro de firmas',
+            'Priority': 'default',
+            'Tags': 'memo,pencil'
+          },
+          body: name + ' dejó un mensaje: "' + preview + '"'
+        }).catch(function (e) {
+          console.error('ntfy error:', e);
+        });
+      })
+      .then(function () {
         form.hidden = true;
         successEl.hidden = false;
       })
@@ -312,8 +328,6 @@ function initGuestbook() {
 }
 
 function initRsvp() {
-  var NTFY_TOPIC = 'Wedding_JC_Gabriela';
-
   var params = new URLSearchParams(window.location.search);
   var guestId = params.get('id') ? decodeURIComponent(params.get('id')) : null;
   var invitado1 = params.get('invitado1') ? decodeURIComponent(params.get('invitado1')) : null;
