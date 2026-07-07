@@ -88,6 +88,9 @@
   initRsvp();
 })();
 
+var SUPABASE_URL = 'https://zbwndyeozrpjrmltsdri.supabase.co/rest/v1';
+var SUPABASE_ANON_KEY = 'sb_publishable_61Gn8It1YJxEXel2Z_xLqw_ScRM8tC4';
+
 function galleryImagePath(filename) {
   return 'Assets/images/' + filename.replace(/&/g, '%26');
 }
@@ -249,6 +252,7 @@ function initGallery() {
 function initGuestbook() {
   var form = document.getElementById('guestbook-form');
   var successEl = document.getElementById('guestbook-success');
+  var submitBtn = form ? form.querySelector('.guestbook-submit') : null;
 
   if (!form) {
     return;
@@ -259,20 +263,55 @@ function initGuestbook() {
 
     var nameInput = document.getElementById('guestbook-name');
     var messageInput = document.getElementById('guestbook-message');
+    var name = nameInput.value.trim();
+    var message = messageInput.value.trim();
 
-    if (!nameInput.value.trim() || !messageInput.value.trim()) {
+    if (!name || !message) {
       form.reportValidity();
       return;
     }
 
-    form.hidden = true;
-    successEl.hidden = false;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+    }
+
+    fetch(SUPABASE_URL + '/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        from: name,
+        message: message
+      })
+    })
+      .then(function (res) {
+        if (!res.ok) {
+          return res.json().then(function (err) {
+            console.error('Supabase error:', err);
+            throw new Error('save_failed');
+          });
+        }
+
+        form.hidden = true;
+        successEl.hidden = false;
+      })
+      .catch(function (e) {
+        console.error('Error de red:', e);
+        window.alert('No se pudo guardar tu mensaje. Por favor intenta de nuevo.');
+      })
+      .finally(function () {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+        }
+      });
   });
 }
 
 function initRsvp() {
-  var SUPABASE_URL = 'https://zbwndyeozrpjrmltsdri.supabase.co/rest/v1';
-  var SUPABASE_ANON_KEY = 'sb_publishable_61Gn8It1YJxEXel2Z_xLqw_ScRM8tC4';
   var NTFY_TOPIC = 'Wedding_JC_Gabriela';
 
   var params = new URLSearchParams(window.location.search);
