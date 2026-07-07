@@ -40,20 +40,21 @@ jobs:
             Assets/icons/music-note.webp
             Assets/icons/end.png
             Assets/icons/DRESSCODE.png
+            Assets/icons/NU.png
             Assets/images/foto4.jpg
-            Assets/images/GABY&CARLOS18.jpg
-            Assets/images/GABY&CARLOS65.jpg
-            Assets/images/GABY&CARLOS75.jpg
+            "Assets/images/GABY&CARLOS18.jpg"
+            "Assets/images/GABY&CARLOS65.jpg"
+            "Assets/images/GABY&CARLOS75.jpg"
             Assets/images/Marble_Background.png
-            Assets/images/GABY&CARLOS.jpg
-            Assets/images/GABY&CARLOS10.jpg
-            Assets/images/GABY&CARLOS22.jpg
-            Assets/images/GABY&CARLOS33.jpg
-            Assets/images/GABY&CARLOS44.jpg
-            Assets/images/GABY&CARLOS55.jpg
-            Assets/images/GABY&CARLOS66.jpg
-            Assets/images/GABY&CARLOS85.jpg
-            Assets/images/GABY&CARLOS95.jpg
+            "Assets/images/GABY&CARLOS.jpg"
+            "Assets/images/GABY&CARLOS10.jpg"
+            "Assets/images/GABY&CARLOS22.jpg"
+            "Assets/images/GABY&CARLOS33.jpg"
+            "Assets/images/GABY&CARLOS44.jpg"
+            "Assets/images/GABY&CARLOS55.jpg"
+            "Assets/images/GABY&CARLOS66.jpg"
+            "Assets/images/GABY&CARLOS85.jpg"
+            "Assets/images/GABY&CARLOS95.jpg"
           )
 
           for file in "${files[@]}"; do
