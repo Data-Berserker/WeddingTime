@@ -148,10 +148,7 @@ function initGallery() {
 
     trackEl.appendChild(slide);
     slides.push(slide);
-
-    img.addEventListener('load', function () {
-      goToSlide(index, false);
-    });
+    bindSlideImage(img);
   });
 
   function updateUI() {
@@ -170,6 +167,17 @@ function initGallery() {
 
   function getSlideOffset(slide) {
     return slide.offsetLeft + slide.offsetWidth / 2 - viewportEl.offsetWidth / 2;
+  }
+
+  function refreshGalleryPosition() {
+    if (!slides.length) {
+      return;
+    }
+
+    updateSlideStates();
+    updateUI();
+    trackEl.style.transition = 'none';
+    trackEl.style.transform = 'translateX(-' + getSlideOffset(slides[index]) + 'px)';
   }
 
   function goToSlide(nextIndex, animate) {
@@ -197,6 +205,17 @@ function initGallery() {
       setTimeout(function () {
         isAnimating = false;
       }, 500);
+    }
+  }
+
+  function bindSlideImage(img) {
+    function handleReady() {
+      refreshGalleryPosition();
+    }
+
+    img.addEventListener('load', handleReady);
+    if (img.complete) {
+      handleReady();
     }
   }
 
@@ -243,10 +262,25 @@ function initGallery() {
   }, { passive: true });
 
   window.addEventListener('resize', function () {
-    goToSlide(index, false);
+    refreshGalleryPosition();
   });
 
-  goToSlide(0, false);
+  window.addEventListener('load', function () {
+    refreshGalleryPosition();
+  });
+
+  if (typeof ResizeObserver !== 'undefined') {
+    var galleryResizeObserver = new ResizeObserver(function () {
+      refreshGalleryPosition();
+    });
+    galleryResizeObserver.observe(viewportEl);
+  }
+
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      refreshGalleryPosition();
+    });
+  });
 }
 
 function escapeHtml(text) {
@@ -441,8 +475,8 @@ function initRsvp() {
 
   if (nombreMostrado && rsvpInvite) {
     rsvpInvite.textContent = esPlural
-      ? 'Nos complace invitarlos a nuestra boda, ' + nombreMostrado
-      : 'Nos complace invitarte a nuestra boda, ' + nombreMostrado;
+      ? 'Nos complace invitarlos a nuestra boda ' + nombreMostrado
+      : 'Nos complace invitarte a nuestra boda ' + nombreMostrado;
   }
 
   function openRsvpModal() {
