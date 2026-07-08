@@ -50,7 +50,33 @@ def optimize_png(path: Path, max_width: int) -> None:
     print(f"{path.name} -> {jpg_path.name}: {before / 1024 / 1024:.2f} MB -> {after / 1024 / 1024:.2f} MB")
 
 
+def optimize_marble_background() -> None:
+    source = IMAGES / "Marble_Background.png"
+    if not source.exists():
+        print("Skip missing file: Marble_Background.png")
+        return
+
+    before = source.stat().st_size
+    image = Image.open(source).convert("RGB")
+    max_width = 2560
+    if image.width > max_width:
+        height = round(image.height * max_width / image.width)
+        image = image.resize((max_width, height), Image.Resampling.LANCZOS)
+
+    webp_path = IMAGES / "Marble_Background.webp"
+    jpg_path = IMAGES / "Marble_Background.jpg"
+    image.save(webp_path, format="WEBP", quality=90, method=6)
+    image.save(jpg_path, format="JPEG", quality=90, optimize=True, progressive=True)
+    print(
+        f"Marble_Background: {before / 1024 / 1024:.2f} MB -> "
+        f"webp {webp_path.stat().st_size / 1024:.0f} KB, "
+        f"jpg {jpg_path.stat().st_size / 1024:.0f} KB"
+    )
+
+
 def main() -> None:
+    optimize_marble_background()
+
     for name, max_width in FILES.items():
         path = IMAGES / name
         if not path.exists():
