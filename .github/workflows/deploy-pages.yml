@@ -44,19 +44,19 @@ jobs:
             Assets/icons/NU.png
             Assets/images/foto4.jpg
             "Assets/images/GABY&CARLOS18.jpg"
-            "Assets/images/GABY&CARLOS65.jpg"
-            "Assets/images/GABY&CARLOS75.jpg"
+            Assets/images/foto2.jpg
+            "Assets/images/GABY&CARLOS73.jpg"
             Assets/images/Marble_Background.webp
             Assets/images/Marble_Background.jpg
-            "Assets/images/GABY&CARLOS.jpg"
-            "Assets/images/GABY&CARLOS10.jpg"
-            "Assets/images/GABY&CARLOS22.jpg"
-            "Assets/images/GABY&CARLOS33.jpg"
-            "Assets/images/GABY&CARLOS44.jpg"
-            "Assets/images/GABY&CARLOS55.jpg"
-            "Assets/images/GABY&CARLOS66.jpg"
-            "Assets/images/GABY&CARLOS85.jpg"
-            "Assets/images/GABY&CARLOS95.jpg"
+            "Assets/images/2beUsed/GABY&CARLOS.jpg"
+            "Assets/images/2beUsed/GABY&CARLOS41.jpg"
+            "Assets/images/2beUsed/GABY&CARLOS42.jpg"
+            "Assets/images/2beUsed/GABY&CARLOS61.jpg"
+            "Assets/images/2beUsed/GABY&CARLOS71.jpg"
+            "Assets/images/2beUsed/GABY&CARLOS79.jpg"
+            "Assets/images/2beUsed/GABY&CARLOS82.jpg"
+            "Assets/images/2beUsed/GABY&CARLOS921.jpg"
+            "Assets/images/2beUsed/GABY&CARLOS95.jpg"
           )
 
           for file in "${files[@]}"; do

@@ -93,20 +93,19 @@ var NTFY_TOPIC = 'Wedding_JC_Gabriela';
 })();
 
 function galleryImagePath(filename) {
-  return 'Assets/images/' + filename.replace(/&/g, '%26');
+  return 'Assets/images/2beUsed/' + filename.replace(/&/g, '%26');
 }
 
 function initGallery() {
   var GALLERY_FILES = [
     'GABY&CARLOS.jpg',
-    'GABY&CARLOS10.jpg',
-    'GABY&CARLOS22.jpg',
-    'GABY&CARLOS33.jpg',
-    'GABY&CARLOS44.jpg',
-    'GABY&CARLOS55.jpg',
-    'GABY&CARLOS66.jpg',
-    'GABY&CARLOS75.jpg',
-    'GABY&CARLOS85.jpg',
+    'GABY&CARLOS41.jpg',
+    'GABY&CARLOS42.jpg',
+    'GABY&CARLOS61.jpg',
+    'GABY&CARLOS71.jpg',
+    'GABY&CARLOS79.jpg',
+    'GABY&CARLOS82.jpg',
+    'GABY&CARLOS921.jpg',
     'GABY&CARLOS95.jpg'
   ];
 

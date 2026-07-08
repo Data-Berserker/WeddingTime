@@ -12,17 +12,17 @@ IMAGES = ROOT / "Assets" / "images"
 FILES = {
     "foto4.jpg": 1920,
     "GABY&CARLOS18.jpg": 1600,
-    "GABY&CARLOS65.jpg": 1600,
-    "GABY&CARLOS75.jpg": 1600,
-    "GABY&CARLOS.jpg": 1400,
-    "GABY&CARLOS10.jpg": 1400,
-    "GABY&CARLOS22.jpg": 1400,
-    "GABY&CARLOS33.jpg": 1400,
-    "GABY&CARLOS44.jpg": 1400,
-    "GABY&CARLOS55.jpg": 1400,
-    "GABY&CARLOS66.jpg": 1400,
-    "GABY&CARLOS85.jpg": 1400,
-    "GABY&CARLOS95.jpg": 1400,
+    "foto2.jpg": 1600,
+    "GABY&CARLOS73.jpg": 1600,
+    "2beUsed/GABY&CARLOS.jpg": 1400,
+    "2beUsed/GABY&CARLOS41.jpg": 1400,
+    "2beUsed/GABY&CARLOS42.jpg": 1400,
+    "2beUsed/GABY&CARLOS61.jpg": 1400,
+    "2beUsed/GABY&CARLOS71.jpg": 1400,
+    "2beUsed/GABY&CARLOS79.jpg": 1400,
+    "2beUsed/GABY&CARLOS82.jpg": 1400,
+    "2beUsed/GABY&CARLOS921.jpg": 1400,
+    "2beUsed/GABY&CARLOS95.jpg": 1400,
 }
 
 
