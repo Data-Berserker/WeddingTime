@@ -444,6 +444,97 @@ ul {
   color: var(--text-muted);
 }
 
+.rsvp-modal-btn--alt {
+  background: transparent;
+  border: 1px solid rgba(53, 10, 6, 0.35);
+  color: var(--tan);
+}
+
+.rsvp-modal-btn--back {
+  background: transparent;
+  border: 1px solid rgba(85, 85, 85, 0.35);
+  color: var(--text-muted);
+}
+
+.rsvp-modal-viewport {
+  overflow: hidden;
+}
+
+.rsvp-modal-step {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.rsvp-modal-step[hidden] {
+  display: none;
+}
+
+.rsvp-count-display {
+  margin: 0 0 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 6vw, 36px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--black);
+  line-height: 1.2;
+}
+
+.rsvp-count-slider-wrap {
+  margin-bottom: 28px;
+  padding: 0 4px;
+}
+
+.rsvp-count-slider {
+  width: 100%;
+  height: 4px;
+  margin: 0;
+  appearance: none;
+  background: rgba(53, 10, 6, 0.2);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.rsvp-count-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  background: var(--tan);
+  box-shadow: 0 1px 4px rgba(26, 26, 26, 0.2);
+  cursor: pointer;
+}
+
+.rsvp-count-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  background: var(--tan);
+  box-shadow: 0 1px 4px rgba(26, 26, 26, 0.2);
+  cursor: pointer;
+}
+
+.rsvp-count-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 0 2px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.rsvp-count-tick {
+  width: 1.5rem;
+  text-align: center;
+}
+
+.rsvp-count-tick--active {
+  color: var(--tan);
+  font-weight: 600;
+}
+
 /* ── Cajas de acento (padres y padrinos) ── */
 .parents-section,
 .padrinos-section {

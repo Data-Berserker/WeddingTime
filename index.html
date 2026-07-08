@@ -394,24 +394,61 @@
         <span id="modal-tickets-value"></span>
       </p>
 
-      <div class="rsvp-modal-divider" aria-hidden="true"></div>
+      <div class="rsvp-modal-viewport">
+        <div class="rsvp-modal-step rsvp-modal-step--active" id="rsvp-step-main">
+          <div class="rsvp-modal-divider" aria-hidden="true"></div>
 
-      <label class="rsvp-modal-field-label" for="modal-comments">
-        Comentarios <span class="rsvp-modal-optional">(opcional)</span>
-      </label>
-      <textarea
-        id="modal-comments"
-        class="rsvp-modal-textarea"
-        placeholder="Restricciones alimentarias, mensaje para los novios..."
-      ></textarea>
+          <label class="rsvp-modal-field-label" for="modal-comments">
+            Comentarios <span class="rsvp-modal-optional">(opcional)</span>
+          </label>
+          <textarea
+            id="modal-comments"
+            class="rsvp-modal-textarea"
+            placeholder="Restricciones alimentarias, mensaje para los novios..."
+          ></textarea>
 
-      <div class="rsvp-modal-actions">
-        <button type="button" class="rsvp-modal-btn rsvp-modal-btn--confirm" id="modal-confirm-btn">
-          Confirmo asistencia
-        </button>
-        <button type="button" class="rsvp-modal-btn rsvp-modal-btn--decline" id="modal-decline-btn">
-          No podré asistir
-        </button>
+          <div class="rsvp-modal-actions">
+            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--confirm" id="modal-confirm-btn">
+              Confirmo asistencia
+            </button>
+            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--alt" id="modal-custom-count-btn" hidden>
+              Confirmar cantidad diferente de invitados
+            </button>
+            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--decline" id="modal-decline-btn">
+              No podré asistir
+            </button>
+          </div>
+        </div>
+
+        <div class="rsvp-modal-step" id="rsvp-step-count" hidden>
+          <div class="rsvp-modal-divider" aria-hidden="true"></div>
+
+          <p class="rsvp-modal-field-label">¿Cuántos invitados asistirán?</p>
+          <p class="rsvp-count-display" id="modal-count-display" aria-live="polite">1 invitado</p>
+
+          <div class="rsvp-count-slider-wrap">
+            <input
+              type="range"
+              id="modal-count-slider"
+              class="rsvp-count-slider"
+              min="1"
+              max="2"
+              value="1"
+              step="1"
+              aria-label="Cantidad de invitados"
+            >
+            <div class="rsvp-count-ticks" id="modal-count-ticks" aria-hidden="true"></div>
+          </div>
+
+          <div class="rsvp-modal-actions">
+            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--confirm" id="modal-confirm-custom-btn">
+              Confirmar asistencia
+            </button>
+            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--back" id="modal-back-btn">
+              Regresar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

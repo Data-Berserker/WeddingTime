@@ -451,7 +451,8 @@ function initRsvp() {
   var guestId = params.get('id') ? decodeURIComponent(params.get('id')) : null;
   var invitado1 = params.get('invitado1') ? decodeURIComponent(params.get('invitado1')) : null;
   var invitado2 = params.get('invitado2') ? decodeURIComponent(params.get('invitado2')) : null;
-  var tickets = params.get('tickets') ? parseInt(params.get('tickets'), 10) : null;
+  var ticketsParam = params.get('tickets') ? parseInt(params.get('tickets'), 10) : null;
+  var maxTickets = ticketsParam && ticketsParam > 0 ? ticketsParam : 1;
 
   var nombreMostrado = invitado1
     ? (invitado2 ? invitado1 + ' y ' + invitado2 : invitado1)
@@ -463,11 +464,19 @@ function initRsvp() {
   var rsvpInvite = document.getElementById('rsvp-invite');
   var closeBtn = document.getElementById('rsvp-modal-close');
   var confirmBtn = document.getElementById('modal-confirm-btn');
+  var customCountBtn = document.getElementById('modal-custom-count-btn');
   var declineBtn = document.getElementById('modal-decline-btn');
+  var confirmCustomBtn = document.getElementById('modal-confirm-custom-btn');
+  var backBtn = document.getElementById('modal-back-btn');
+  var stepMain = document.getElementById('rsvp-step-main');
+  var stepCount = document.getElementById('rsvp-step-count');
   var guestNameEl = document.getElementById('modal-guest-name');
   var ticketsRow = document.getElementById('modal-tickets-row');
   var ticketsVal = document.getElementById('modal-tickets-value');
   var commentsEl = document.getElementById('modal-comments');
+  var countSlider = document.getElementById('modal-count-slider');
+  var countDisplay = document.getElementById('modal-count-display');
+  var countTicks = document.getElementById('modal-count-ticks');
 
   if (!modal || !rsvpBtn) {
     return;
@@ -479,11 +488,82 @@ function initRsvp() {
       : 'Nos complace invitarte a nuestra boda ' + nombreMostrado;
   }
 
+  function formatGuestCount(count) {
+    return count + ' invitado' + (count > 1 ? 's' : '');
+  }
+
+  function updateCountDisplay(count) {
+    if (!countDisplay) {
+      return;
+    }
+
+    countDisplay.textContent = formatGuestCount(count);
+
+    if (!countTicks) {
+      return;
+    }
+
+    var tickEls = countTicks.querySelectorAll('.rsvp-count-tick');
+    tickEls.forEach(function (tick) {
+      var value = parseInt(tick.getAttribute('data-value'), 10);
+      tick.classList.toggle('rsvp-count-tick--active', value === count);
+    });
+  }
+
+  function buildCountTicks() {
+    if (!countTicks || !countSlider) {
+      return;
+    }
+
+    countTicks.innerHTML = '';
+    countSlider.max = String(maxTickets);
+    countSlider.min = '1';
+    countSlider.value = '1';
+
+    for (var i = 1; i <= maxTickets; i++) {
+      var tick = document.createElement('span');
+      tick.className = 'rsvp-count-tick' + (i === 1 ? ' rsvp-count-tick--active' : '');
+      tick.setAttribute('data-value', String(i));
+      tick.textContent = String(i);
+      countTicks.appendChild(tick);
+    }
+
+    updateCountDisplay(1);
+  }
+
+  function showMainStep() {
+    if (stepMain) {
+      stepMain.hidden = false;
+      stepMain.classList.add('rsvp-modal-step--active');
+    }
+    if (stepCount) {
+      stepCount.hidden = true;
+      stepCount.classList.remove('rsvp-modal-step--active');
+    }
+  }
+
+  function showCountStep() {
+    if (!stepMain || !stepCount) {
+      return;
+    }
+
+    buildCountTicks();
+    stepMain.hidden = true;
+    stepMain.classList.remove('rsvp-modal-step--active');
+    stepCount.hidden = false;
+    stepCount.classList.add('rsvp-modal-step--active');
+
+    if (confirmCustomBtn) {
+      confirmCustomBtn.textContent = esPlural ? 'Confirmamos asistencia' : 'Confirmo asistencia';
+    }
+  }
+
   function openRsvpModal() {
     guestNameEl.textContent = nombreMostrado || 'Invitado';
+    showMainStep();
 
-    if (tickets && ticketsRow && ticketsVal) {
-      ticketsVal.textContent = tickets + ' lugar' + (tickets > 1 ? 'es' : '') + ' reservado' + (tickets > 1 ? 's' : '');
+    if (ticketsParam && ticketsParam > 0 && ticketsRow && ticketsVal) {
+      ticketsVal.textContent = maxTickets + ' lugar' + (maxTickets > 1 ? 'es' : '') + ' reservado' + (maxTickets > 1 ? 's' : '');
       ticketsRow.hidden = false;
     } else if (ticketsRow) {
       ticketsRow.hidden = true;
@@ -491,6 +571,10 @@ function initRsvp() {
 
     if (confirmBtn) {
       confirmBtn.textContent = esPlural ? 'Confirmamos asistencia' : 'Confirmo asistencia';
+    }
+
+    if (customCountBtn) {
+      customCountBtn.hidden = maxTickets <= 1;
     }
 
     modal.hidden = false;
@@ -502,13 +586,22 @@ function initRsvp() {
   function closeRsvpModal() {
     modal.hidden = true;
     document.body.style.overflow = '';
+    showMainStep();
   }
 
   function showMessage(message) {
     window.alert(message);
   }
 
-  function submitRsvp(respuesta) {
+  function setButtonsDisabled(disabled) {
+    [confirmBtn, customCountBtn, declineBtn, confirmCustomBtn, backBtn].forEach(function (btn) {
+      if (btn) {
+        btn.disabled = disabled;
+      }
+    });
+  }
+
+  function submitRsvp(respuesta, pasesConfirmados) {
     if (!guestId) {
       showMessage('No se encontró el identificador del invitado. Verifica el link de tu invitación.');
       return;
@@ -516,15 +609,17 @@ function initRsvp() {
 
     var comentarios = commentsEl.value.trim();
     var nombre = nombreMostrado || 'Invitado';
+    var asiste = respuesta === 'confirma';
+    var pases = asiste ? (pasesConfirmados || maxTickets) : 0;
     var payload = {
       confirmo: true,
-      asistira: respuesta === 'confirma',
+      asistira: asiste,
+      pases_confirmados: pases,
       comentarios: comentarios || null,
       confirmado_el: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString().replace('Z', '-06:00')
     };
 
-    confirmBtn.disabled = true;
-    declineBtn.disabled = true;
+    setButtonsDisabled(true);
 
     fetch(SUPABASE_URL + '/invitados?id=eq.' + guestId, {
       method: 'PATCH',
@@ -537,9 +632,8 @@ function initRsvp() {
       body: JSON.stringify(payload)
     })
       .then(function (res) {
-        var asiste = respuesta === 'confirma';
         var ntfyBody = asiste
-          ? nombre + ' confirmó asistencia.' + (tickets ? ' Pases: ' + tickets + '.' : '') + (comentarios ? ' Comentario: "' + comentarios + '"' : '')
+          ? nombre + ' confirmó asistencia. Pases: ' + pases + '.' + (comentarios ? ' Comentario: "' + comentarios + '"' : '')
           : nombre + ' no podrá asistir.' + (comentarios ? ' Comentario: "' + comentarios + '"' : '');
 
         return fetch('https://ntfy.sh/' + NTFY_TOPIC, {
@@ -558,10 +652,13 @@ function initRsvp() {
         closeRsvpModal();
 
         if (res.ok) {
-          if (respuesta === 'confirma') {
+          if (asiste) {
+            var pasesMsg = pases === 1
+              ? '1 invitado'
+              : pases + ' invitados';
             showMessage(esPlural
-              ? '¡Gracias, ' + nombre + '! Su asistencia ha sido confirmada.'
-              : '¡Gracias, ' + nombre + '! Tu asistencia ha sido confirmada.');
+              ? '¡Gracias, ' + nombre + '! Su asistencia ha sido confirmada para ' + pasesMsg + '.'
+              : '¡Gracias, ' + nombre + '! Tu asistencia ha sido confirmada para ' + pasesMsg + '.');
           } else {
             showMessage(esPlural
               ? 'Gracias por avisarnos, ' + nombre + '. ¡Los tendremos en nuestros corazones!'
@@ -579,8 +676,7 @@ function initRsvp() {
         showMessage('No se pudo conectar. Verifica tu conexión e intenta de nuevo.');
       })
       .finally(function () {
-        confirmBtn.disabled = false;
-        declineBtn.disabled = false;
+        setButtonsDisabled(false);
       });
   }
 
@@ -595,15 +691,39 @@ function initRsvp() {
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && !modal.hidden) {
-      closeRsvpModal();
+      if (stepCount && !stepCount.hidden) {
+        showMainStep();
+      } else {
+        closeRsvpModal();
+      }
     }
   });
 
+  if (countSlider) {
+    countSlider.addEventListener('input', function () {
+      updateCountDisplay(parseInt(countSlider.value, 10));
+    });
+  }
+
   confirmBtn.addEventListener('click', function () {
-    submitRsvp('confirma');
+    submitRsvp('confirma', maxTickets);
   });
 
+  if (customCountBtn) {
+    customCountBtn.addEventListener('click', showCountStep);
+  }
+
+  if (backBtn) {
+    backBtn.addEventListener('click', showMainStep);
+  }
+
+  if (confirmCustomBtn && countSlider) {
+    confirmCustomBtn.addEventListener('click', function () {
+      submitRsvp('confirma', parseInt(countSlider.value, 10));
+    });
+  }
+
   declineBtn.addEventListener('click', function () {
-    submitRsvp('ausencia');
+    submitRsvp('ausencia', 0);
   });
 }
