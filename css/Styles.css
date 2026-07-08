@@ -23,7 +23,7 @@ body {
   color: var(--black);
   line-height: 1.5;
   background-color: var(--white);
-  background-image: url('../Assets/images/Marble_Background.jpg');
+  background-image: url('../Assets/images/Marble_Background.png');
   background-size: cover;
   background-position: center;
   background-attachment: scroll;

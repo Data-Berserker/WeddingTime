@@ -23,7 +23,6 @@ FILES = {
     "GABY&CARLOS66.jpg": 1400,
     "GABY&CARLOS85.jpg": 1400,
     "GABY&CARLOS95.jpg": 1400,
-    "Marble_Background.png": 1920,
 }
 
 
