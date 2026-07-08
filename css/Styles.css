@@ -1209,18 +1209,6 @@ ul {
     inset -12px 0 24px rgba(53, 10, 6, 0.04);
 }
 
-.signatures-page::before {
-  content: '';
-  position: absolute;
-  top: 16px;
-  bottom: 16px;
-  left: 50%;
-  width: 1px;
-  transform: translateX(-50%);
-  background: linear-gradient(180deg, transparent, rgba(53, 10, 6, 0.12) 15%, rgba(53, 10, 6, 0.12) 85%, transparent);
-  pointer-events: none;
-}
-
 .signatures-list {
   position: relative;
   z-index: 1;
@@ -1460,10 +1448,6 @@ ul {
 
   .signatures-page {
     padding: 36px 28px 32px;
-  }
-
-  .signatures-page::before {
-    display: none;
   }
 }
 
