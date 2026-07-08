@@ -37,6 +37,7 @@ jobs:
             Assets/icons/rings.png
             Assets/icons/cup.webp
             Assets/icons/fork_and_spoon.webp
+            Assets/icons/fireworks.png
             Assets/icons/music-note.webp
             Assets/icons/end.png
             Assets/icons/DRESSCODE.png
@@ -45,7 +46,7 @@ jobs:
             "Assets/images/GABY&CARLOS18.jpg"
             "Assets/images/GABY&CARLOS65.jpg"
             "Assets/images/GABY&CARLOS75.jpg"
-            Assets/images/Marble_Background.png
+            Assets/images/Marble_Background.jpg
             "Assets/images/GABY&CARLOS.jpg"
             "Assets/images/GABY&CARLOS10.jpg"
             "Assets/images/GABY&CARLOS22.jpg"

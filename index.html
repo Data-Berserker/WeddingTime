@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gabriela & Juan Carlos – 07.11.2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/Styles.css">
+  <link rel="preload" as="image" href="Assets/images/foto4.jpg" fetchpriority="high">
 </head>
 <body>
 
@@ -35,6 +38,10 @@
         src="Assets/images/foto4.jpg"
         alt="Gabriela y Juan Carlos"
         class="hero-image"
+        width="1920"
+        height="1281"
+        decoding="async"
+        fetchpriority="high"
       >
 
       <div class="hero-content">
@@ -118,11 +125,15 @@
           src="Assets/images/GABY%26CARLOS65.jpg"
           alt="Gabriela y Juan Carlos"
           class="photo-pair-img"
+          loading="lazy"
+          decoding="async"
         >
         <img
           src="Assets/images/GABY%26CARLOS75.jpg"
           alt="Gabriela y Juan Carlos"
           class="photo-pair-img"
+          loading="lazy"
+          decoding="async"
         >
       </div>
     </section>
@@ -135,7 +146,7 @@
         <article class="timeline-row timeline-row--left">
           <div class="timeline-side timeline-side--content">
             <div class="timeline-icon" aria-hidden="true">
-              <img src="Assets/icons/church.webp" alt="" class="timeline-icon-img">
+              <img src="Assets/icons/church.webp" alt="" class="timeline-icon-img" loading="lazy" decoding="async" width="64" height="64">
             </div>
             <h3 class="timeline-event">Ceremonia Religiosa</h3>
             <p class="timeline-venue">Templo del Encino</p>
@@ -154,7 +165,7 @@
           <div class="timeline-axis"><span class="timeline-dot"></span></div>
           <div class="timeline-side timeline-side--content">
             <div class="timeline-icon" aria-hidden="true">
-              <img src="Assets/icons/rings.png" alt="" class="timeline-icon-img">
+              <img src="Assets/icons/rings.png" alt="" class="timeline-icon-img" loading="lazy" decoding="async" width="64" height="64">
             </div>
             <h3 class="timeline-event">Recepción</h3>
             <p class="timeline-venue">Hacienda Los Cuartos</p>
@@ -165,7 +176,7 @@
         <article class="timeline-row timeline-row--left">
           <div class="timeline-side timeline-side--content">
             <div class="timeline-icon" aria-hidden="true">
-              <img src="Assets/icons/cup.webp" alt="" class="timeline-icon-img">
+              <img src="Assets/icons/cup.webp" alt="" class="timeline-icon-img" loading="lazy" decoding="async" width="64" height="64">
             </div>
             <h3 class="timeline-event">Bebida de Bienvenida</h3>
             <p class="timeline-venue">Hacienda Los Cuartos</p>
@@ -183,9 +194,9 @@
           <div class="timeline-axis"><span class="timeline-dot"></span></div>
           <div class="timeline-side timeline-side--content">
             <div class="timeline-icon" aria-hidden="true">
-              <img src="Assets/icons/fork_and_spoon.webp" alt="" class="timeline-icon-img">
+              <img src="Assets/icons/fireworks.png" alt="" class="timeline-icon-img" loading="lazy" decoding="async" width="64" height="64">
             </div>
-            <h3 class="timeline-event">Comida</h3>
+            <h3 class="timeline-event">Entrada de los Novios</h3>
             <p class="timeline-venue">Hacienda Los Cuartos</p>
           </div>
         </article>
@@ -193,28 +204,42 @@
         <article class="timeline-row timeline-row--left">
           <div class="timeline-side timeline-side--content">
             <div class="timeline-icon" aria-hidden="true">
-              <img src="Assets/icons/music-note.webp" alt="" class="timeline-icon-img">
+              <img src="Assets/icons/fork_and_spoon.webp" alt="" class="timeline-icon-img" loading="lazy" decoding="async" width="64" height="64">
             </div>
-            <h3 class="timeline-event">Fiesta</h3>
+            <h3 class="timeline-event">Comida</h3>
             <p class="timeline-venue">Hacienda Los Cuartos</p>
           </div>
           <div class="timeline-axis"><span class="timeline-dot"></span></div>
           <div class="timeline-side timeline-side--time">
-            <time class="timeline-time">19:00</time>
+            <time class="timeline-time">18:15</time>
           </div>
         </article>
 
         <article class="timeline-row timeline-row--right">
           <div class="timeline-side timeline-side--time">
-            <time class="timeline-time">11:00 PM</time>
+            <time class="timeline-time">19:00</time>
           </div>
           <div class="timeline-axis"><span class="timeline-dot"></span></div>
           <div class="timeline-side timeline-side--content">
             <div class="timeline-icon" aria-hidden="true">
-              <img src="Assets/icons/end.png" alt="" class="timeline-icon-img">
+              <img src="Assets/icons/music-note.webp" alt="" class="timeline-icon-img" loading="lazy" decoding="async" width="64" height="64">
+            </div>
+            <h3 class="timeline-event">Apertura de Pista</h3>
+            <p class="timeline-venue">Hacienda Los Cuartos</p>
+          </div>
+        </article>
+
+        <article class="timeline-row timeline-row--left">
+          <div class="timeline-side timeline-side--content">
+            <div class="timeline-icon" aria-hidden="true">
+              <img src="Assets/icons/end.png" alt="" class="timeline-icon-img" loading="lazy" decoding="async" width="64" height="64">
             </div>
             <h3 class="timeline-event">Fin de la Recepción</h3>
             <p class="timeline-venue">Hacienda Los Cuartos</p>
+          </div>
+          <div class="timeline-axis"><span class="timeline-dot"></span></div>
+          <div class="timeline-side timeline-side--time">
+            <time class="timeline-time">11:00 PM</time>
           </div>
         </article>
 
@@ -224,7 +249,7 @@
     <section class="dresscode-section" id="codigo-vestimenta">
       <h2 class="dresscode-title">Código de Vestimenta</h2>
       <p class="dresscode-subtitle">Etiqueta Formal</p>
-      <img src="Assets/icons/DRESSCODE.png" alt="" class="dresscode-icon">
+      <img src="Assets/icons/DRESSCODE.png" alt="" class="dresscode-icon" loading="lazy" decoding="async" width="100" height="100">
 
       <div class="dresscode-grid">
         <div class="dresscode-card">
@@ -253,6 +278,8 @@
         src="Assets/images/GABY%26CARLOS18.jpg"
         alt="Gabriela y Juan Carlos"
         class="photo-full-img"
+        loading="lazy"
+        decoding="async"
       >
     </section>
 
@@ -265,16 +292,12 @@
     <section class="gifts-section" id="mesa-regalos">
       <h2 class="gifts-title">Mesa de Regalos</h2>
       <p class="gifts-text">
-        Lo más importante para nosotros es contar con su presencia. No es necesario traer un regalo,
-        pero si desean obsequiarnos con algo, con mucho gusto recibiremos regalos en efectivo en sobres
-        que se entregarán el día del evento.
-      </p>
-      <p class="gifts-text">
-        Si prefieren hacer su regalo con anticipación, también recibiremos con gusto transferencias SPEI:
+        Su presencia es el mejor regalo que podríamos recibir. Si desean tener un detalle con nosotros,
+        agradeceremos que sea una aportación económica para nuestra luna de miel, será muy apreciada.
       </p>
 
       <div class="gifts-bank-card">
-        <img src="Assets/icons/NU.png" alt="Nu" class="gifts-bank-logo">
+        <img src="Assets/icons/NU.png" alt="Nu" class="gifts-bank-logo" loading="lazy" decoding="async" width="56" height="28">
         <dl class="gifts-bank-details">
           <div class="gifts-bank-row">
             <dt class="gifts-bank-label">CLABE</dt>
@@ -361,6 +384,18 @@
         </p>
       </div>
     </section>
+
+    <section class="signatures-section" id="firmas-invitados" aria-label="Mensajes de invitados">
+      <div class="signatures-book">
+        <h2 class="signatures-title">Palabras de nuestros invitados</h2>
+        <div class="signatures-page">
+          <div class="signatures-list" id="signatures-list" role="list"></div>
+          <p class="signatures-empty" id="signatures-empty" hidden>
+            Aún no hay mensajes en nuestro libro. ¡Sé el primero en dejar tus palabras!
+          </p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <div class="rsvp-modal" id="rsvp-modal" hidden>
@@ -395,6 +430,6 @@
     </div>
   </div>
 
-  <script src="js/wedding.js"></script>
+  <script src="js/wedding.js" defer></script>
 </body>
 </html>

@@ -1,3 +1,7 @@
+var SUPABASE_URL = 'https://zbwndyeozrpjrmltsdri.supabase.co/rest/v1';
+var SUPABASE_ANON_KEY = 'sb_publishable_61Gn8It1YJxEXel2Z_xLqw_ScRM8tC4';
+var NTFY_TOPIC = 'Wedding_JC_Gabriela';
+
 (function () {
   'use strict';
 
@@ -88,10 +92,6 @@
   initRsvp();
 })();
 
-var SUPABASE_URL = 'https://zbwndyeozrpjrmltsdri.supabase.co/rest/v1';
-var SUPABASE_ANON_KEY = 'sb_publishable_61Gn8It1YJxEXel2Z_xLqw_ScRM8tC4';
-var NTFY_TOPIC = 'Wedding_JC_Gabriela';
-
 function galleryImagePath(filename) {
   return 'Assets/images/' + filename.replace(/&/g, '%26');
 }
@@ -137,7 +137,7 @@ function initGallery() {
     var img = document.createElement('img');
     img.src = galleryImagePath(file);
     img.alt = 'Gabriela y Juan Carlos';
-    img.loading = i < 3 ? 'eager' : 'lazy';
+    img.loading = i === 0 ? 'eager' : 'lazy';
     img.draggable = false;
 
     slide.appendChild(img);
@@ -250,10 +250,95 @@ function initGallery() {
   goToSlide(0, false);
 }
 
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function supabaseHeaders() {
+  return {
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+  };
+}
+
+function loadGuestbookMessages() {
+  var listEl = document.getElementById('signatures-list');
+  var emptyEl = document.getElementById('signatures-empty');
+
+  if (!listEl) {
+    return;
+  }
+
+  var params = new URLSearchParams({
+    select: '*',
+    order: 'created_at.asc'
+  });
+
+  fetch(SUPABASE_URL + '/Messages?' + params.toString(), {
+    method: 'GET',
+    headers: Object.assign({
+      'Accept': 'application/json'
+    }, supabaseHeaders())
+  })
+    .then(function (res) {
+      if (!res.ok) {
+        return res.text().then(function (body) {
+          console.error('Supabase GET error:', res.status, body);
+          throw new Error('load_failed');
+        });
+      }
+      return res.json();
+    })
+    .then(function (messages) {
+      listEl.innerHTML = '';
+
+      if (!messages.length) {
+        if (emptyEl) {
+          emptyEl.textContent = 'Aún no hay mensajes en nuestro libro. ¡Sé el primero en dejar tus palabras!';
+          emptyEl.hidden = false;
+        }
+        return;
+      }
+
+      if (emptyEl) {
+        emptyEl.hidden = true;
+      }
+
+      messages.forEach(function (entry) {
+        var figure = document.createElement('figure');
+        figure.className = 'signature-entry';
+        figure.setAttribute('role', 'listitem');
+
+        figure.innerHTML =
+          '<blockquote class="signature-quote">' +
+            '<span class="signature-mark" aria-hidden="true">“</span>' +
+            escapeHtml(entry.message || '') +
+          '</blockquote>' +
+          '<figcaption class="signature-author">' + escapeHtml(entry.from || 'Anónimo') + '</figcaption>';
+
+        listEl.appendChild(figure);
+      });
+    })
+    .catch(function (e) {
+      console.error('Error al cargar mensajes:', e);
+      if (emptyEl) {
+        emptyEl.textContent = 'No pudimos cargar los mensajes por ahora.';
+        emptyEl.hidden = false;
+      }
+    });
+}
+
 function initGuestbook() {
   var form = document.getElementById('guestbook-form');
   var successEl = document.getElementById('guestbook-success');
   var submitBtn = form ? form.querySelector('.guestbook-submit') : null;
+
+  loadGuestbookMessages();
 
   if (!form) {
     return;
@@ -314,6 +399,7 @@ function initGuestbook() {
       .then(function () {
         form.hidden = true;
         successEl.hidden = false;
+        loadGuestbookMessages();
       })
       .catch(function (e) {
         console.error('Error de red:', e);
