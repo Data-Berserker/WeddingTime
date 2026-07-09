@@ -2,6 +2,304 @@ var SUPABASE_URL = 'https://zbwndyeozrpjrmltsdri.supabase.co/rest/v1';
 var SUPABASE_ANON_KEY = 'sb_publishable_61Gn8It1YJxEXel2Z_xLqw_ScRM8tC4';
 var NTFY_TOPIC = 'Wedding_JC_Gabriela';
 
+var currentLang = 'es';
+var languageChangeCallbacks = [];
+
+var TRANSLATIONS = {
+  es: {
+    'nav.openMenu': 'Abrir menú',
+    'nav.sections': 'Secciones de la invitación',
+    'nav.home': 'Inicio',
+    'nav.rsvp': 'Confirmar asistencia',
+    'nav.itinerary': 'Itinerario',
+    'nav.dresscode': 'Código de vestimenta',
+    'nav.gifts': 'Mesa de regalos',
+    'nav.gallery': 'Galería',
+    'nav.guestbook': 'Libro de firmas',
+    'nav.lang': 'Idioma',
+    'hero.alt': 'Gabriela y Juan Carlos',
+    'hero.date': '07 DE NOVIEMBRE DEL 2026',
+    'countdown.days': 'Día(s)',
+    'countdown.hours': 'Hora(s)',
+    'countdown.minutes': 'Minuto(s)',
+    'countdown.seconds': 'Segundo(s)',
+    'rsvp.inviteDefault': 'Nos complace invitarte a nuestra boda',
+    'rsvp.inviteSingle': '{name}, nos complace invitarte a nuestra boda',
+    'rsvp.invitePlural': '{name}, nos complace invitarlos a nuestra boda',
+    'rsvp.btn': 'Confirma tu asistencia',
+    'parents.title': 'Nuestros Padres',
+    'parents.brideParents': 'Padres de La Novia',
+    'parents.groomParents': 'Padres del Novio',
+    'padrinos.title': 'Padrinos',
+    'photo.aria': 'Galería de fotos',
+    'itinerary.title': 'Itinerario',
+    'itinerary.ceremony': 'Ceremonia Religiosa',
+    'itinerary.reception': 'Recepción',
+    'itinerary.entrance': 'Entrada de los Novios',
+    'itinerary.dinner': 'Comida',
+    'itinerary.waltz': 'Vals',
+    'itinerary.end': 'Fin del Evento',
+    'itinerary.viewMap': 'Ver mapa',
+    'dresscode.title': 'Código de Vestimenta',
+    'dresscode.subtitle': 'Etiqueta Formal',
+    'dresscode.women': 'Mujeres',
+    'dresscode.womenText': 'Vestido Largo Formal.',
+    'dresscode.womenNote': '(No Blanco, Colores Claros o Rojo)',
+    'dresscode.men': 'Hombres',
+    'dresscode.menText': 'Traje Completo<br>Formal.',
+    'dresscode.menNote': '(No blanco, colores<br>claros o estampados)',
+    'dresscode.pinterest': 'Ver inspiración en Pinterest',
+    'photo.couple': 'Foto de la pareja',
+    'adults.title': 'Solo Adultos',
+    'adults.text': 'Aunque amamos a sus pequeños, hagan de este día una cita y pasémosla increíble.',
+    'gifts.title': 'Mesa de Regalos',
+    'gifts.text': 'Su presencia es el mejor regalo que podríamos recibir. Sin embargo, si desean tener un detalle con nosotros, agradeceremos que sea una aportación económica para nuestra luna de miel, será muy apreciada.',
+    'gifts.clabe': 'CLABE',
+    'gifts.bank': 'Banco',
+    'gifts.holder': 'Titular',
+    'gallery.title': 'Galería',
+    'gallery.prev': 'Foto anterior',
+    'gallery.next': 'Foto siguiente',
+    'guestbook.title': 'Libro de Firmas',
+    'guestbook.nameLabel': 'Tu Nombre*',
+    'guestbook.messageLabel': 'Dedícanos unas lindas palabras',
+    'guestbook.placeholder': 'Escribe aquí*',
+    'guestbook.submit': 'Firmar',
+    'guestbook.success': '¡Gracias por dejar tu mensaje! Con mucho cariño, Gabriela y Juan Carlos.',
+    'signatures.title': 'Palabras de nuestros invitados',
+    'signatures.aria': 'Mensajes de invitados',
+    'signatures.empty': 'Aún no hay mensajes en nuestro libro. ¡Sé el primero en dejar tus palabras!',
+    'signatures.loadError': 'No pudimos cargar los mensajes por ahora.',
+    'signatures.anonymous': 'Anónimo',
+    'rsvp.modal.close': 'Cerrar',
+    'rsvp.modal.label': 'Confirmación de asistencia',
+    'rsvp.modal.guest': 'Invitado',
+    'rsvp.modal.comments': 'Comentarios',
+    'rsvp.modal.optional': '(opcional)',
+    'rsvp.modal.commentsPlaceholder': 'Restricciones alimentarias, mensaje para los novios...',
+    'rsvp.modal.confirm': 'Confirmo asistencia',
+    'rsvp.modal.confirmPlural': 'Confirmamos asistencia',
+    'rsvp.modal.customCount': 'Confirmar cantidad diferente de invitados',
+    'rsvp.modal.decline': 'No podré asistir',
+    'rsvp.modal.declinePlural': 'No podremos asistir',
+    'rsvp.modal.howMany': '¿Cuántos invitados asistirán?',
+    'rsvp.modal.confirmCustom': 'Confirmar asistencia',
+    'rsvp.modal.back': 'Regresar',
+    'rsvp.modal.guestCountAria': 'Cantidad de invitados',
+    'rsvp.modal.guestCount.one': '1 invitado',
+    'rsvp.modal.guestCount.many': '{n} invitados',
+    'rsvp.modal.tickets.one': '1 lugar reservado',
+    'rsvp.modal.tickets.many': '{n} lugares reservados',
+    'rsvp.alert.noId': 'No se encontró el identificador del invitado. Verifica el link de tu invitación.',
+    'rsvp.alert.saveError': 'Hubo un problema al guardar tu confirmación. Por favor intenta de nuevo.',
+    'rsvp.alert.networkError': 'No se pudo conectar. Verifica tu conexión e intenta de nuevo.',
+    'rsvp.alert.guestbookError': 'No se pudo guardar tu mensaje. Por favor intenta de nuevo.',
+    'rsvp.success.guestCount.one': '1 invitado',
+    'rsvp.success.guestCount.many': '{n} invitados',
+    'rsvp.success.confirmSingle': '¡Gracias, {name}! Tu asistencia ha sido confirmada para {count}.',
+    'rsvp.success.confirmPlural': '¡Gracias, {name}! Su asistencia ha sido confirmada para {count}.',
+    'rsvp.success.declineSingle': 'Gracias por avisarnos, {name}. ¡Te tendremos en nuestros corazones!',
+    'rsvp.success.declinePlural': 'Gracias por avisarnos, {name}. ¡Los tendremos en nuestros corazones!'
+  },
+  en: {
+    'nav.openMenu': 'Open menu',
+    'nav.sections': 'Invitation sections',
+    'nav.home': 'Home',
+    'nav.rsvp': 'RSVP',
+    'nav.itinerary': 'Itinerary',
+    'nav.dresscode': 'Dress code',
+    'nav.gifts': 'Gift registry',
+    'nav.gallery': 'Gallery',
+    'nav.guestbook': 'Guestbook',
+    'nav.lang': 'Language',
+    'hero.alt': 'Gabriela and Juan Carlos',
+    'hero.date': 'NOVEMBER 7, 2026',
+    'countdown.days': 'Day(s)',
+    'countdown.hours': 'Hour(s)',
+    'countdown.minutes': 'Minute(s)',
+    'countdown.seconds': 'Second(s)',
+    'rsvp.inviteDefault': 'We are pleased to invite you to our wedding',
+    'rsvp.inviteSingle': '{name}, we are pleased to invite you to our wedding',
+    'rsvp.invitePlural': '{name}, we are pleased to invite you to our wedding',
+    'rsvp.btn': 'Confirm your attendance',
+    'parents.title': 'Our Parents',
+    'parents.brideParents': "Bride's Parents",
+    'parents.groomParents': "Groom's Parents",
+    'padrinos.title': 'Godparents',
+    'photo.aria': 'Photo gallery',
+    'itinerary.title': 'Itinerary',
+    'itinerary.ceremony': 'Religious Ceremony',
+    'itinerary.reception': 'Reception',
+    'itinerary.entrance': "Couple's Entrance",
+    'itinerary.dinner': 'Dinner',
+    'itinerary.waltz': 'First Dance',
+    'itinerary.end': 'End of the Event',
+    'itinerary.viewMap': 'View map',
+    'dresscode.title': 'Dress Code',
+    'dresscode.subtitle': 'Formal Attire',
+    'dresscode.women': 'Women',
+    'dresscode.womenText': 'Formal long dress.',
+    'dresscode.womenNote': '(No white, light colors, or red)',
+    'dresscode.men': 'Men',
+    'dresscode.menText': 'Full<br>formal suit.',
+    'dresscode.menNote': '(No white, light colors,<br>or patterns)',
+    'dresscode.pinterest': 'View inspiration on Pinterest',
+    'photo.couple': 'Photo of the couple',
+    'adults.title': 'Adults Only',
+    'adults.text': 'Although we adore your little ones, please make this a date night and let\'s have an incredible time together.',
+    'gifts.title': 'Gift Registry',
+    'gifts.text': 'Your presence is the greatest gift we could receive. However, if you wish to give us a gift, we would appreciate a monetary contribution toward our honeymoon.',
+    'gifts.clabe': 'CLABE',
+    'gifts.bank': 'Bank',
+    'gifts.holder': 'Account holder',
+    'gallery.title': 'Gallery',
+    'gallery.prev': 'Previous photo',
+    'gallery.next': 'Next photo',
+    'guestbook.title': 'Guestbook',
+    'guestbook.nameLabel': 'Your Name*',
+    'guestbook.messageLabel': 'Share some kind words with us',
+    'guestbook.placeholder': 'Write here*',
+    'guestbook.submit': 'Sign',
+    'guestbook.success': 'Thank you for your message! With love, Gabriela and Juan Carlos.',
+    'signatures.title': 'Words from our guests',
+    'signatures.aria': 'Guest messages',
+    'signatures.empty': 'There are no messages in our guestbook yet. Be the first to leave your words!',
+    'signatures.loadError': 'We couldn\'t load the messages right now.',
+    'signatures.anonymous': 'Anonymous',
+    'rsvp.modal.close': 'Close',
+    'rsvp.modal.label': 'Attendance confirmation',
+    'rsvp.modal.guest': 'Guest',
+    'rsvp.modal.comments': 'Comments',
+    'rsvp.modal.optional': '(optional)',
+    'rsvp.modal.commentsPlaceholder': 'Dietary restrictions, message for the couple...',
+    'rsvp.modal.confirm': 'I will attend',
+    'rsvp.modal.confirmPlural': 'We will attend',
+    'rsvp.modal.customCount': 'Confirm a different number of guests',
+    'rsvp.modal.decline': 'I won\'t be able to attend',
+    'rsvp.modal.declinePlural': 'We won\'t be able to attend',
+    'rsvp.modal.howMany': 'How many guests will attend?',
+    'rsvp.modal.confirmCustom': 'Confirm attendance',
+    'rsvp.modal.back': 'Go back',
+    'rsvp.modal.guestCountAria': 'Number of guests',
+    'rsvp.modal.guestCount.one': '1 guest',
+    'rsvp.modal.guestCount.many': '{n} guests',
+    'rsvp.modal.tickets.one': '1 seat reserved',
+    'rsvp.modal.tickets.many': '{n} seats reserved',
+    'rsvp.alert.noId': 'Guest identifier not found. Please check your invitation link.',
+    'rsvp.alert.saveError': 'There was a problem saving your confirmation. Please try again.',
+    'rsvp.alert.networkError': 'Could not connect. Check your connection and try again.',
+    'rsvp.alert.guestbookError': 'Could not save your message. Please try again.',
+    'rsvp.success.guestCount.one': '1 guest',
+    'rsvp.success.guestCount.many': '{n} guests',
+    'rsvp.success.confirmSingle': 'Thank you, {name}! Your attendance has been confirmed for {count}.',
+    'rsvp.success.confirmPlural': 'Thank you, {name}! Your attendance has been confirmed for {count}.',
+    'rsvp.success.declineSingle': 'Thank you for letting us know, {name}. You will be in our hearts!',
+    'rsvp.success.declinePlural': 'Thank you for letting us know, {name}. You will be in our hearts!'
+  }
+};
+
+function t(key, vars) {
+  var str = (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) ||
+    TRANSLATIONS.es[key] ||
+    key;
+
+  if (vars) {
+    Object.keys(vars).forEach(function (varKey) {
+      str = str.replace('{' + varKey + '}', vars[varKey]);
+    });
+  }
+
+  return str;
+}
+
+function getLang() {
+  return currentLang;
+}
+
+function getNameConnector() {
+  return currentLang === 'en' ? ' and ' : ' y ';
+}
+
+function onLanguageChange(callback) {
+  languageChangeCallbacks.push(callback);
+}
+
+function applyTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+
+  document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+    el.innerHTML = t(el.getAttribute('data-i18n-html'));
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+    el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+  });
+
+  document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+    el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+  });
+
+  document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+    el.alt = t(el.getAttribute('data-i18n-alt'));
+  });
+}
+
+function updateLangToggle() {
+  var toggle = document.getElementById('lang-toggle');
+  if (!toggle) {
+    return;
+  }
+
+  toggle.querySelectorAll('.lang-toggle-btn').forEach(function (btn) {
+    var isActive = btn.getAttribute('data-lang') === currentLang;
+    btn.classList.toggle('lang-toggle-btn--active', isActive);
+    btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+  });
+}
+
+function setLanguage(lang) {
+  if (!TRANSLATIONS[lang] || lang === currentLang) {
+    return;
+  }
+
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  localStorage.setItem('wedding-lang', lang);
+  applyTranslations();
+  updateLangToggle();
+
+  languageChangeCallbacks.forEach(function (callback) {
+    callback(lang);
+  });
+}
+
+function initI18n() {
+  var params = new URLSearchParams(window.location.search);
+  var savedLang = localStorage.getItem('wedding-lang');
+  var initialLang = params.get('lang') || savedLang || 'es';
+
+  if (!TRANSLATIONS[initialLang]) {
+    initialLang = 'es';
+  }
+
+  currentLang = initialLang;
+  document.documentElement.lang = initialLang;
+  applyTranslations();
+  updateLangToggle();
+
+  var toggle = document.getElementById('lang-toggle');
+  if (toggle) {
+    toggle.addEventListener('click', function (e) {
+      var btn = e.target.closest('.lang-toggle-btn');
+      if (btn) {
+        setLanguage(btn.getAttribute('data-lang'));
+      }
+    });
+  }
+}
+
 (function () {
   'use strict';
 
@@ -87,6 +385,7 @@ var NTFY_TOPIC = 'Wedding_JC_Gabriela';
   setInterval(updateCountdown, 1000);
   setActiveNavLink();
 
+  initI18n();
   initGallery();
   initGuestbook();
   initRsvp();
@@ -135,7 +434,7 @@ function initGallery() {
 
     var img = document.createElement('img');
     img.src = galleryImagePath(file);
-    img.alt = 'Gabriela y Juan Carlos';
+    img.alt = t('hero.alt');
     img.loading = i === 0 ? 'eager' : 'lazy';
     img.draggable = false;
 
@@ -281,6 +580,15 @@ function initGallery() {
       refreshGalleryPosition();
     });
   });
+
+  onLanguageChange(function () {
+    slides.forEach(function (slide) {
+      var img = slide.querySelector('img');
+      if (img) {
+        img.alt = t('hero.alt');
+      }
+    });
+  });
 }
 
 function escapeHtml(text) {
@@ -332,7 +640,7 @@ function loadGuestbookMessages() {
 
       if (!messages.length) {
         if (emptyEl) {
-          emptyEl.textContent = 'Aún no hay mensajes en nuestro libro. ¡Sé el primero en dejar tus palabras!';
+          emptyEl.textContent = t('signatures.empty');
           emptyEl.hidden = false;
         }
         return;
@@ -352,7 +660,7 @@ function loadGuestbookMessages() {
             '<span class="signature-mark" aria-hidden="true">“</span>' +
             escapeHtml(entry.message || '') +
           '</blockquote>' +
-          '<figcaption class="signature-author">' + escapeHtml(entry.from || 'Anónimo') + '</figcaption>';
+          '<figcaption class="signature-author">' + escapeHtml(entry.from || t('signatures.anonymous')) + '</figcaption>';
 
         listEl.appendChild(figure);
       });
@@ -360,7 +668,7 @@ function loadGuestbookMessages() {
     .catch(function (e) {
       console.error('Error al cargar mensajes:', e);
       if (emptyEl) {
-        emptyEl.textContent = 'No pudimos cargar los mensajes por ahora.';
+        emptyEl.textContent = t('signatures.loadError');
         emptyEl.hidden = false;
       }
     });
@@ -436,13 +744,17 @@ function initGuestbook() {
       })
       .catch(function (e) {
         console.error('Error de red:', e);
-        window.alert('No se pudo guardar tu mensaje. Por favor intenta de nuevo.');
+        window.alert(t('rsvp.alert.guestbookError'));
       })
       .finally(function () {
         if (submitBtn) {
           submitBtn.disabled = false;
         }
       });
+  });
+
+  onLanguageChange(function () {
+    loadGuestbookMessages();
   });
 }
 
@@ -454,9 +766,20 @@ function initRsvp() {
   var ticketsParam = params.get('tickets') ? parseInt(params.get('tickets'), 10) : null;
   var maxTickets = ticketsParam && ticketsParam > 0 ? ticketsParam : 1;
 
-  var nombreMostrado = invitado1
-    ? (invitado2 ? invitado1 + ' y ' + invitado2 : invitado1)
-    : null;
+  var nombreMostrado = null;
+
+  function rebuildDisplayName() {
+    if (!invitado1) {
+      nombreMostrado = null;
+      return;
+    }
+
+    nombreMostrado = invitado2
+      ? invitado1 + getNameConnector() + invitado2
+      : invitado1;
+  }
+
+  rebuildDisplayName();
   var esPlural = !!invitado2;
 
   var modal = document.getElementById('rsvp-modal');
@@ -482,15 +805,62 @@ function initRsvp() {
     return;
   }
 
-  if (nombreMostrado && rsvpInvite) {
-    rsvpInvite.textContent = esPlural
-      ? nombreMostrado + ', nos complace invitarlos a nuestra boda'
-      : nombreMostrado + ', nos complace invitarte a nuestra boda';
+  function updateInviteText() {
+    if (!rsvpInvite) {
+      return;
+    }
+
+    if (nombreMostrado) {
+      rsvpInvite.textContent = t(esPlural ? 'rsvp.invitePlural' : 'rsvp.inviteSingle', {
+        name: nombreMostrado
+      });
+    } else {
+      rsvpInvite.textContent = t('rsvp.inviteDefault');
+    }
   }
 
   function formatGuestCount(count) {
-    return count + ' invitado' + (count > 1 ? 's' : '');
+    return count === 1
+      ? t('rsvp.modal.guestCount.one')
+      : t('rsvp.modal.guestCount.many', { n: count });
   }
+
+  function formatTicketsText(count) {
+    return count === 1
+      ? t('rsvp.modal.tickets.one')
+      : t('rsvp.modal.tickets.many', { n: count });
+  }
+
+  function formatSuccessGuestCount(count) {
+    return count === 1
+      ? t('rsvp.success.guestCount.one')
+      : t('rsvp.success.guestCount.many', { n: count });
+  }
+
+  function updateModalLabels() {
+    if (confirmBtn) {
+      confirmBtn.textContent = t(esPlural ? 'rsvp.modal.confirmPlural' : 'rsvp.modal.confirm');
+    }
+
+    if (confirmCustomBtn) {
+      confirmCustomBtn.textContent = t(esPlural ? 'rsvp.modal.confirmPlural' : 'rsvp.modal.confirm');
+    }
+
+    if (declineBtn) {
+      declineBtn.textContent = t(esPlural ? 'rsvp.modal.declinePlural' : 'rsvp.modal.decline');
+    }
+
+    if (countSlider) {
+      countSlider.setAttribute('aria-label', t('rsvp.modal.guestCountAria'));
+    }
+
+    if (countDisplay && countSlider) {
+      updateCountDisplay(parseInt(countSlider.value, 10));
+    }
+  }
+
+  updateInviteText();
+  updateModalLabels();
 
   function updateCountDisplay(count) {
     if (!countDisplay) {
@@ -554,24 +924,22 @@ function initRsvp() {
     stepCount.classList.add('rsvp-modal-step--active');
 
     if (confirmCustomBtn) {
-      confirmCustomBtn.textContent = esPlural ? 'Confirmamos asistencia' : 'Confirmo asistencia';
+      confirmCustomBtn.textContent = t(esPlural ? 'rsvp.modal.confirmPlural' : 'rsvp.modal.confirm');
     }
   }
 
   function openRsvpModal() {
-    guestNameEl.textContent = nombreMostrado || 'Invitado';
+    guestNameEl.textContent = nombreMostrado || t('rsvp.modal.guest');
     showMainStep();
 
     if (ticketsParam && ticketsParam > 0 && ticketsRow && ticketsVal) {
-      ticketsVal.textContent = maxTickets + ' lugar' + (maxTickets > 1 ? 'es' : '') + ' reservado' + (maxTickets > 1 ? 's' : '');
+      ticketsVal.textContent = formatTicketsText(maxTickets);
       ticketsRow.hidden = false;
     } else if (ticketsRow) {
       ticketsRow.hidden = true;
     }
 
-    if (confirmBtn) {
-      confirmBtn.textContent = esPlural ? 'Confirmamos asistencia' : 'Confirmo asistencia';
-    }
+    updateModalLabels();
 
     if (customCountBtn) {
       customCountBtn.hidden = maxTickets <= 1;
@@ -603,12 +971,12 @@ function initRsvp() {
 
   function submitRsvp(respuesta, pasesConfirmados) {
     if (!guestId) {
-      showMessage('No se encontró el identificador del invitado. Verifica el link de tu invitación.');
+      showMessage(t('rsvp.alert.noId'));
       return;
     }
 
     var comentarios = commentsEl.value.trim();
-    var nombre = nombreMostrado || 'Invitado';
+    var nombre = nombreMostrado || t('rsvp.modal.guest');
     var asiste = respuesta === 'confirma';
     var pases = asiste ? (pasesConfirmados || maxTickets) : 0;
     var payload = {
@@ -653,27 +1021,26 @@ function initRsvp() {
 
         if (res.ok) {
           if (asiste) {
-            var pasesMsg = pases === 1
-              ? '1 invitado'
-              : pases + ' invitados';
-            showMessage(esPlural
-              ? '¡Gracias, ' + nombre + '! Su asistencia ha sido confirmada para ' + pasesMsg + '.'
-              : '¡Gracias, ' + nombre + '! Tu asistencia ha sido confirmada para ' + pasesMsg + '.');
+            var pasesMsg = formatSuccessGuestCount(pases);
+            showMessage(t(esPlural ? 'rsvp.success.confirmPlural' : 'rsvp.success.confirmSingle', {
+              name: nombre,
+              count: pasesMsg
+            }));
           } else {
-            showMessage(esPlural
-              ? 'Gracias por avisarnos, ' + nombre + '. ¡Los tendremos en nuestros corazones!'
-              : 'Gracias por avisarnos, ' + nombre + '. ¡Te tendremos en nuestros corazones!');
+            showMessage(t(esPlural ? 'rsvp.success.declinePlural' : 'rsvp.success.declineSingle', {
+              name: nombre
+            }));
           }
         } else {
           return res.json().then(function (err) {
             console.error('Supabase error:', err);
-            showMessage('Hubo un problema al guardar tu confirmación. Por favor intenta de nuevo.');
+            showMessage(t('rsvp.alert.saveError'));
           });
         }
       })
       .catch(function (e) {
         console.error('Error de red:', e);
-        showMessage('No se pudo conectar. Verifica tu conexión e intenta de nuevo.');
+        showMessage(t('rsvp.alert.networkError'));
       })
       .finally(function () {
         setButtonsDisabled(false);
@@ -725,5 +1092,19 @@ function initRsvp() {
 
   declineBtn.addEventListener('click', function () {
     submitRsvp('ausencia', 0);
+  });
+
+  onLanguageChange(function () {
+    rebuildDisplayName();
+    updateInviteText();
+    updateModalLabels();
+
+    if (!modal.hidden && ticketsParam && ticketsParam > 0 && ticketsVal) {
+      ticketsVal.textContent = formatTicketsText(maxTickets);
+    }
+
+    if (!modal.hidden && guestNameEl) {
+      guestNameEl.textContent = nombreMostrado || t('rsvp.modal.guest');
+    }
   });
 }

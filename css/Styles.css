@@ -128,6 +128,41 @@ ul {
   opacity: 0.55;
 }
 
+.lang-toggle {
+  position: absolute;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.lang-toggle-btn {
+  padding: 4px 2px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: var(--black);
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.2s ease;
+}
+
+.lang-toggle-btn:hover,
+.lang-toggle-btn--active {
+  opacity: 1;
+}
+
+.lang-toggle-divider {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--black);
+  opacity: 0.25;
+  user-select: none;
+}
+
 /* ── Hero ── */
 .hero {
   position: relative;
@@ -1368,7 +1403,16 @@ ul {
 @media (max-width: 768px) {
   .navbar {
     justify-content: flex-end;
-    padding-right: 20px;
+    padding-right: 72px;
+  }
+
+  .lang-toggle {
+    right: 20px;
+  }
+
+  .lang-toggle-btn {
+    font-size: 14px;
+    padding: 6px 2px;
   }
 
   .navbar-toggle {

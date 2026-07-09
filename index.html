@@ -13,23 +13,29 @@
 <body>
 
   <header class="navbar" id="navbar">
-    <button class="navbar-toggle" id="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
+    <button class="navbar-toggle" id="nav-toggle" type="button" data-i18n-aria="nav.openMenu" aria-label="Abrir menú" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
 
-    <nav class="navbar-menu" id="nav-menu" aria-label="Secciones de la invitación">
+    <nav class="navbar-menu" id="nav-menu" data-i18n-aria="nav.sections" aria-label="Secciones de la invitación">
       <ul class="navbar-list">
-        <li><a href="#inicio" class="nav-link active">Inicio</a></li>
-        <li><a href="#confirmar-asistencia" class="nav-link">Confirmar asistencia</a></li>
-        <li><a href="#itinerario" class="nav-link">Itinerario</a></li>
-        <li><a href="#codigo-vestimenta" class="nav-link">Código de vestimenta</a></li>
-        <li><a href="#mesa-regalos" class="nav-link">Mesa de regalos</a></li>
-        <li><a href="#galeria" class="nav-link">Galería</a></li>
-        <li><a href="#libro-firmas" class="nav-link">Libro de firmas</a></li>
+        <li><a href="#inicio" class="nav-link active" data-i18n="nav.home">Inicio</a></li>
+        <li><a href="#confirmar-asistencia" class="nav-link" data-i18n="nav.rsvp">Confirmar asistencia</a></li>
+        <li><a href="#itinerario" class="nav-link" data-i18n="nav.itinerary">Itinerario</a></li>
+        <li><a href="#codigo-vestimenta" class="nav-link" data-i18n="nav.dresscode">Código de vestimenta</a></li>
+        <li><a href="#mesa-regalos" class="nav-link" data-i18n="nav.gifts">Mesa de regalos</a></li>
+        <li><a href="#galeria" class="nav-link" data-i18n="nav.gallery">Galería</a></li>
+        <li><a href="#libro-firmas" class="nav-link" data-i18n="nav.guestbook">Libro de firmas</a></li>
       </ul>
     </nav>
+
+    <div class="lang-toggle" id="lang-toggle" role="group" data-i18n-aria="nav.lang" aria-label="Idioma">
+      <button type="button" class="lang-toggle-btn lang-toggle-btn--active" data-lang="es" aria-pressed="true">ES</button>
+      <span class="lang-toggle-divider" aria-hidden="true">|</span>
+      <button type="button" class="lang-toggle-btn" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </header>
 
   <main>
@@ -37,6 +43,7 @@
       <img
         src="Assets/images/foto4.jpg"
         alt="Gabriela y Juan Carlos"
+        data-i18n-alt="hero.alt"
         class="hero-image"
         width="1920"
         height="1281"
@@ -53,27 +60,27 @@
 
         <div class="hero-countdown">
           <div class="countdown-line" aria-hidden="true"></div>
-          <p class="countdown-date">07 DE NOVIEMBRE DEL 2026</p>
+          <p class="countdown-date" data-i18n="hero.date">07 DE NOVIEMBRE DEL 2026</p>
 
           <div class="countdown-grid" aria-live="polite">
             <div class="countdown-item">
               <span class="countdown-num" id="cd-dias">000</span>
-              <span class="countdown-label">Día(s)</span>
+              <span class="countdown-label" data-i18n="countdown.days">Día(s)</span>
             </div>
             <div class="countdown-divider" aria-hidden="true"></div>
             <div class="countdown-item">
               <span class="countdown-num" id="cd-horas">00</span>
-              <span class="countdown-label">Hora(s)</span>
+              <span class="countdown-label" data-i18n="countdown.hours">Hora(s)</span>
             </div>
             <div class="countdown-divider" aria-hidden="true"></div>
             <div class="countdown-item">
               <span class="countdown-num" id="cd-min">00</span>
-              <span class="countdown-label">Minuto(s)</span>
+              <span class="countdown-label" data-i18n="countdown.minutes">Minuto(s)</span>
             </div>
             <div class="countdown-divider" aria-hidden="true"></div>
             <div class="countdown-item">
               <span class="countdown-num" id="cd-seg">00</span>
-              <span class="countdown-label">Segundo(s)</span>
+              <span class="countdown-label" data-i18n="countdown.seconds">Segundo(s)</span>
             </div>
           </div>
         </div>
@@ -81,23 +88,23 @@
     </section>
 
     <section class="rsvp-section" id="confirmar-asistencia">
-      <p class="rsvp-invite" id="rsvp-invite">Nos complace invitarte a nuestra boda</p>
-      <button type="button" class="rsvp-btn" id="rsvp-btn">Confirma tu asistencia</button>
+      <p class="rsvp-invite" id="rsvp-invite" data-i18n="rsvp.inviteDefault">Nos complace invitarte a nuestra boda</p>
+      <button type="button" class="rsvp-btn" id="rsvp-btn" data-i18n="rsvp.btn">Confirma tu asistencia</button>
     </section>
 
     <section class="parents-section" id="nuestros-padres">
       <div class="accent-box">
-        <h2 class="accent-box-title">Nuestros Padres</h2>
+        <h2 class="accent-box-title" data-i18n="parents.title">Nuestros Padres</h2>
         <div class="accent-box-line" aria-hidden="true"></div>
 
         <div class="parents-grid">
           <div class="parents-col">
-            <p class="parents-role">Padres de La Novia</p>
+            <p class="parents-role" data-i18n="parents.brideParents">Padres de La Novia</p>
             <p class="parents-names">Alicia Mireles Montañez</p>
             <p class="parents-names">y Enrique Beltrán Muñoz</p>
           </div>
           <div class="parents-col">
-            <p class="parents-role">Padres del Novio</p>
+            <p class="parents-role" data-i18n="parents.groomParents">Padres del Novio</p>
             <p class="parents-names">Ana Bertha Lara Rodriguez</p>
             <p class="parents-names">y Juan Antonio Durón Delgado</p>
           </div>
@@ -107,7 +114,7 @@
 
     <section class="padrinos-section" id="padrinos">
       <div class="accent-box">
-        <h2 class="accent-box-title">Padrinos</h2>
+        <h2 class="accent-box-title" data-i18n="padrinos.title">Padrinos</h2>
         <div class="accent-box-line" aria-hidden="true"></div>
 
         <ul class="padrinos-list">
@@ -119,11 +126,12 @@
       </div>
     </section>
 
-    <section class="photo-pair-section" aria-label="Galería de fotos">
+    <section class="photo-pair-section" data-i18n-aria="photo.aria" aria-label="Galería de fotos">
       <div class="photo-pair">
         <img
           src="Assets/images/foto2.jpg"
           alt="Gabriela y Juan Carlos"
+        data-i18n-alt="hero.alt"
           class="photo-pair-img"
           loading="lazy"
           decoding="async"
@@ -131,6 +139,7 @@
         <img
           src="Assets/images/GABY%26CARLOS73.jpg"
           alt="Gabriela y Juan Carlos"
+        data-i18n-alt="hero.alt"
           class="photo-pair-img"
           loading="lazy"
           decoding="async"
@@ -139,7 +148,7 @@
     </section>
 
     <section class="itinerary-section" id="itinerario">
-      <h2 class="itinerary-title">Itinerario</h2>
+      <h2 class="itinerary-title" data-i18n="itinerary.title">Itinerario</h2>
 
       <div class="timeline">
 
@@ -148,9 +157,9 @@
             <div class="timeline-icon" aria-hidden="true">
               <img src="Assets/icons/church.webp" alt="" class="timeline-icon-img" loading="lazy" decoding="async" width="64" height="64">
             </div>
-            <h3 class="timeline-event">Ceremonia Religiosa</h3>
+            <h3 class="timeline-event" data-i18n="itinerary.ceremony">Ceremonia Religiosa</h3>
             <p class="timeline-venue">Templo del Encino</p>
-            <a href="https://maps.app.goo.gl/48fRsG8Azqhs8dwKA" class="timeline-map-btn" target="_blank" rel="noopener noreferrer">Ver mapa</a>
+            <a href="https://maps.app.goo.gl/48fRsG8Azqhs8dwKA" class="timeline-map-btn" target="_blank" rel="noopener noreferrer" data-i18n="itinerary.viewMap">Ver mapa</a>
           </div>
           <div class="timeline-axis"><span class="timeline-dot"></span></div>
           <div class="timeline-side timeline-side--time">
@@ -167,9 +176,9 @@
             <div class="timeline-icon" aria-hidden="true">
               <img src="Assets/icons/rings.png" alt="" class="timeline-icon-img" loading="lazy" decoding="async" width="64" height="64">
             </div>
-            <h3 class="timeline-event">Recepción</h3>
+            <h3 class="timeline-event" data-i18n="itinerary.reception">Recepción</h3>
             <p class="timeline-venue">Hacienda Los Cuartos</p>
-            <a href="https://maps.app.goo.gl/mup82tCC24NmzMjs6" class="timeline-map-btn" target="_blank" rel="noopener noreferrer">Ver mapa</a>
+            <a href="https://maps.app.goo.gl/mup82tCC24NmzMjs6" class="timeline-map-btn" target="_blank" rel="noopener noreferrer" data-i18n="itinerary.viewMap">Ver mapa</a>
           </div>
         </article>
 
@@ -178,7 +187,7 @@
             <div class="timeline-icon" aria-hidden="true">
               <img src="Assets/icons/fireworks.png" alt="" class="timeline-icon-img" loading="lazy" decoding="async" width="64" height="64">
             </div>
-            <h3 class="timeline-event">Entrada de los Novios</h3>
+            <h3 class="timeline-event" data-i18n="itinerary.entrance">Entrada de los Novios</h3>
             <p class="timeline-venue">Hacienda Los Cuartos</p>
           </div>
           <div class="timeline-axis"><span class="timeline-dot"></span></div>
@@ -196,7 +205,7 @@
             <div class="timeline-icon" aria-hidden="true">
               <img src="Assets/icons/fork_and_spoon.webp" alt="" class="timeline-icon-img" loading="lazy" decoding="async" width="64" height="64">
             </div>
-            <h3 class="timeline-event">Comida</h3>
+            <h3 class="timeline-event" data-i18n="itinerary.dinner">Comida</h3>
             <p class="timeline-venue">Hacienda Los Cuartos</p>
           </div>
         </article>
@@ -206,7 +215,7 @@
             <div class="timeline-icon" aria-hidden="true">
               <img src="Assets/icons/music-note.webp" alt="" class="timeline-icon-img" loading="lazy" decoding="async" width="64" height="64">
             </div>
-            <h3 class="timeline-event">Vals</h3>
+            <h3 class="timeline-event" data-i18n="itinerary.waltz">Vals</h3>
             <p class="timeline-venue">Hacienda Los Cuartos</p>
           </div>
           <div class="timeline-axis"><span class="timeline-dot"></span></div>
@@ -224,7 +233,7 @@
             <div class="timeline-icon" aria-hidden="true">
               <img src="Assets/icons/end.png" alt="" class="timeline-icon-img" loading="lazy" decoding="async" width="64" height="64">
             </div>
-            <h3 class="timeline-event">Fin del Evento</h3>
+            <h3 class="timeline-event" data-i18n="itinerary.end">Fin del Evento</h3>
             <p class="timeline-venue">Hacienda Los Cuartos</p>
           </div>
         </article>
@@ -233,21 +242,21 @@
     </section>
 
     <section class="dresscode-section" id="codigo-vestimenta">
-      <h2 class="dresscode-title">Código de Vestimenta</h2>
-      <p class="dresscode-subtitle">Etiqueta Formal</p>
+      <h2 class="dresscode-title" data-i18n="dresscode.title">Código de Vestimenta</h2>
+      <p class="dresscode-subtitle" data-i18n="dresscode.subtitle">Etiqueta Formal</p>
       <img src="Assets/icons/DRESSCODE.png" alt="" class="dresscode-icon" loading="lazy" decoding="async" width="100" height="100">
 
       <div class="dresscode-grid">
         <div class="dresscode-card">
-          <h3 class="dresscode-label">Mujeres</h3>
-          <p class="dresscode-text">Vestido Largo Formal.</p>
-          <p class="dresscode-note">(No Blanco, Colores Claros o Rojo)</p>
+          <h3 class="dresscode-label" data-i18n="dresscode.women">Mujeres</h3>
+          <p class="dresscode-text" data-i18n="dresscode.womenText">Vestido Largo Formal.</p>
+          <p class="dresscode-note" data-i18n="dresscode.womenNote">(No Blanco, Colores Claros o Rojo)</p>
         </div>
 
         <div class="dresscode-card">
-          <h3 class="dresscode-label">Hombres</h3>
-          <p class="dresscode-text">Traje Completo<br>Formal.</p>
-          <p class="dresscode-note">(No blanco, colores<br>claros o estampados)</p>
+          <h3 class="dresscode-label" data-i18n="dresscode.men">Hombres</h3>
+          <p class="dresscode-text" data-i18n-html="dresscode.menText">Traje Completo<br>Formal.</p>
+          <p class="dresscode-note" data-i18n-html="dresscode.menNote">(No blanco, colores<br>claros o estampados)</p>
         </div>
       </div>
 
@@ -256,13 +265,15 @@
         class="dresscode-btn"
         target="_blank"
         rel="noopener noreferrer"
+        data-i18n="dresscode.pinterest"
       >Ver inspiración en Pinterest</a>
     </section>
 
-    <section class="photo-full-section" aria-label="Foto de la pareja">
+    <section class="photo-full-section" data-i18n-aria="photo.couple" aria-label="Foto de la pareja">
       <img
         src="Assets/images/GABY%26CARLOS18.jpg"
         alt="Gabriela y Juan Carlos"
+        data-i18n-alt="hero.alt"
         class="photo-full-img"
         loading="lazy"
         decoding="async"
@@ -270,14 +281,14 @@
     </section>
 
     <section class="adults-section" id="solo-adultos">
-      <h2 class="adults-title">Solo Adultos</h2>
-      <p class="adults-text">Aunque amamos a sus pequeños, hagan de este día una cita y pasémosla increíble.</p>
+      <h2 class="adults-title" data-i18n="adults.title">Solo Adultos</h2>
+      <p class="adults-text" data-i18n="adults.text">Aunque amamos a sus pequeños, hagan de este día una cita y pasémosla increíble.</p>
       <div class="adults-divider" aria-hidden="true"></div>
     </section>
 
     <section class="gifts-section" id="mesa-regalos">
-      <h2 class="gifts-title">Mesa de Regalos</h2>
-      <p class="gifts-text">
+      <h2 class="gifts-title" data-i18n="gifts.title">Mesa de Regalos</h2>
+      <p class="gifts-text" data-i18n="gifts.text">
         Su presencia es el mejor regalo que podríamos recibir. Sin embargo, si desean tener un detalle con nosotros,
         agradeceremos que sea una aportación económica para nuestra luna de miel, será muy apreciada.
       </p>
@@ -286,15 +297,15 @@
         <img src="Assets/icons/NU.png" alt="Nu" class="gifts-bank-logo" loading="lazy" decoding="async" width="56" height="28">
         <dl class="gifts-bank-details">
           <div class="gifts-bank-row">
-            <dt class="gifts-bank-label">CLABE</dt>
+            <dt class="gifts-bank-label" data-i18n="gifts.clabe">CLABE</dt>
             <dd class="gifts-bank-value">63818001014618588</dd>
           </div>
           <div class="gifts-bank-row">
-            <dt class="gifts-bank-label">Banco</dt>
+            <dt class="gifts-bank-label" data-i18n="gifts.bank">Banco</dt>
             <dd class="gifts-bank-value">Nu</dd>
           </div>
           <div class="gifts-bank-row">
-            <dt class="gifts-bank-label">Titular</dt>
+            <dt class="gifts-bank-label" data-i18n="gifts.holder">Titular</dt>
             <dd class="gifts-bank-value">Gabriela Beltrán Mireles</dd>
           </div>
         </dl>
@@ -302,19 +313,19 @@
     </section>
 
     <section class="gallery-section" id="galeria">
-      <h2 class="gallery-title">Galería</h2>
+      <h2 class="gallery-title" data-i18n="gallery.title">Galería</h2>
 
       <div class="gallery-card">
         <div class="gallery-viewport" id="gallery-viewport">
           <div class="gallery-track" id="gallery-track"></div>
 
-          <button type="button" class="gallery-nav gallery-nav--prev" id="gallery-prev" aria-label="Foto anterior">
+          <button type="button" class="gallery-nav gallery-nav--prev" id="gallery-prev" data-i18n-aria="gallery.prev" aria-label="Foto anterior">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
 
-          <button type="button" class="gallery-nav gallery-nav--next" id="gallery-next" aria-label="Foto siguiente">
+          <button type="button" class="gallery-nav gallery-nav--next" id="gallery-next" data-i18n-aria="gallery.next" aria-label="Foto siguiente">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -334,11 +345,11 @@
 
     <section class="guestbook-section" id="libro-firmas">
       <div class="guestbook-inner">
-        <h2 class="guestbook-title">Libro de Firmas</h2>
+        <h2 class="guestbook-title" data-i18n="guestbook.title">Libro de Firmas</h2>
 
         <form class="guestbook-form" id="guestbook-form" novalidate>
           <div class="guestbook-field">
-            <label class="guestbook-label" for="guestbook-name">Tu Nombre*</label>
+            <label class="guestbook-label" for="guestbook-name" data-i18n="guestbook.nameLabel">Tu Nombre*</label>
             <input
               type="text"
               id="guestbook-name"
@@ -350,33 +361,34 @@
           </div>
 
           <div class="guestbook-field">
-            <label class="guestbook-label" for="guestbook-message">Dedícanos unas lindas palabras</label>
+            <label class="guestbook-label" for="guestbook-message" data-i18n="guestbook.messageLabel">Dedícanos unas lindas palabras</label>
             <textarea
               id="guestbook-message"
               name="message"
               class="guestbook-textarea"
+              data-i18n-placeholder="guestbook.placeholder"
               placeholder="Escribe aquí*"
               required
             ></textarea>
           </div>
 
           <div class="guestbook-actions">
-            <button type="submit" class="guestbook-submit">Firmar</button>
+            <button type="submit" class="guestbook-submit" data-i18n="guestbook.submit">Firmar</button>
           </div>
         </form>
 
-        <p class="guestbook-success" id="guestbook-success" hidden>
+        <p class="guestbook-success" id="guestbook-success" hidden data-i18n="guestbook.success">
           ¡Gracias por dejar tu mensaje! Con mucho cariño, Gabriela y Juan Carlos.
         </p>
       </div>
     </section>
 
-    <section class="signatures-section" id="firmas-invitados" aria-label="Mensajes de invitados">
+    <section class="signatures-section" id="firmas-invitados" data-i18n-aria="signatures.aria" aria-label="Mensajes de invitados">
       <div class="signatures-book">
-        <h2 class="signatures-title">Palabras de nuestros invitados</h2>
+        <h2 class="signatures-title" data-i18n="signatures.title">Palabras de nuestros invitados</h2>
         <div class="signatures-page">
           <div class="signatures-list" id="signatures-list" role="list"></div>
-          <p class="signatures-empty" id="signatures-empty" hidden>
+          <p class="signatures-empty" id="signatures-empty" hidden data-i18n="signatures.empty">
             Aún no hay mensajes en nuestro libro. ¡Sé el primero en dejar tus palabras!
           </p>
         </div>
@@ -386,10 +398,10 @@
 
   <div class="rsvp-modal" id="rsvp-modal" hidden>
     <div class="rsvp-modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-guest-name">
-      <button type="button" class="rsvp-modal-close" id="rsvp-modal-close" aria-label="Cerrar">&times;</button>
+      <button type="button" class="rsvp-modal-close" id="rsvp-modal-close" data-i18n-aria="rsvp.modal.close" aria-label="Cerrar">&times;</button>
 
-      <p class="rsvp-modal-label">Confirmación de asistencia</p>
-      <h3 class="rsvp-modal-name" id="modal-guest-name">Invitado</h3>
+      <p class="rsvp-modal-label" data-i18n="rsvp.modal.label">Confirmación de asistencia</p>
+      <h3 class="rsvp-modal-name" id="modal-guest-name" data-i18n="rsvp.modal.guest">Invitado</h3>
       <p class="rsvp-modal-tickets" id="modal-tickets-row" hidden>
         <span id="modal-tickets-value"></span>
       </p>
@@ -399,22 +411,23 @@
           <div class="rsvp-modal-divider" aria-hidden="true"></div>
 
           <label class="rsvp-modal-field-label" for="modal-comments">
-            Comentarios <span class="rsvp-modal-optional">(opcional)</span>
+            <span data-i18n="rsvp.modal.comments">Comentarios</span> <span class="rsvp-modal-optional" data-i18n="rsvp.modal.optional">(opcional)</span>
           </label>
           <textarea
             id="modal-comments"
             class="rsvp-modal-textarea"
+            data-i18n-placeholder="rsvp.modal.commentsPlaceholder"
             placeholder="Restricciones alimentarias, mensaje para los novios..."
           ></textarea>
 
           <div class="rsvp-modal-actions">
-            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--confirm" id="modal-confirm-btn">
+            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--confirm" id="modal-confirm-btn" data-i18n="rsvp.modal.confirm">
               Confirmo asistencia
             </button>
-            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--alt" id="modal-custom-count-btn" hidden>
+            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--alt" id="modal-custom-count-btn" hidden data-i18n="rsvp.modal.customCount">
               Confirmar cantidad diferente de invitados
             </button>
-            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--decline" id="modal-decline-btn">
+            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--decline" id="modal-decline-btn" data-i18n="rsvp.modal.decline">
               No podré asistir
             </button>
           </div>
@@ -423,8 +436,8 @@
         <div class="rsvp-modal-step" id="rsvp-step-count" hidden>
           <div class="rsvp-modal-divider" aria-hidden="true"></div>
 
-          <p class="rsvp-modal-field-label">¿Cuántos invitados asistirán?</p>
-          <p class="rsvp-count-display" id="modal-count-display" aria-live="polite">1 invitado</p>
+          <p class="rsvp-modal-field-label" data-i18n="rsvp.modal.howMany">¿Cuántos invitados asistirán?</p>
+          <p class="rsvp-count-display" id="modal-count-display" aria-live="polite" data-i18n="rsvp.modal.guestCount.one">1 invitado</p>
 
           <div class="rsvp-count-slider-wrap">
             <input
@@ -435,16 +448,17 @@
               max="2"
               value="1"
               step="1"
+              data-i18n-aria="rsvp.modal.guestCountAria"
               aria-label="Cantidad de invitados"
             >
             <div class="rsvp-count-ticks" id="modal-count-ticks" aria-hidden="true"></div>
           </div>
 
           <div class="rsvp-modal-actions">
-            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--confirm" id="modal-confirm-custom-btn">
+            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--confirm" id="modal-confirm-custom-btn" data-i18n="rsvp.modal.confirmCustom">
               Confirmar asistencia
             </button>
-            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--back" id="modal-back-btn">
+            <button type="button" class="rsvp-modal-btn rsvp-modal-btn--back" id="modal-back-btn" data-i18n="rsvp.modal.back">
               Regresar
             </button>
           </div>
