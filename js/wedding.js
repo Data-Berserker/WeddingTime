@@ -484,8 +484,8 @@ function initRsvp() {
 
   if (nombreMostrado && rsvpInvite) {
     rsvpInvite.textContent = esPlural
-      ? 'Nos complace invitarlos a nuestra boda ' + nombreMostrado
-      : 'Nos complace invitarte a nuestra boda ' + nombreMostrado;
+      ? nombreMostrado + ', nos complace invitarlos a nuestra boda'
+      : nombreMostrado + ', nos complace invitarte a nuestra boda';
   }
 
   function formatGuestCount(count) {
