@@ -617,7 +617,8 @@ function loadGuestbookMessages() {
 
   var params = new URLSearchParams({
     select: '*',
-    order: 'created_at.asc'
+    order: 'created_at.desc',
+    limit: '10'
   });
 
   fetch(SUPABASE_URL + '/Messages?' + params.toString(), {
@@ -650,7 +651,7 @@ function loadGuestbookMessages() {
         emptyEl.hidden = true;
       }
 
-      messages.forEach(function (entry) {
+      messages.reverse().forEach(function (entry) {
         var figure = document.createElement('figure');
         figure.className = 'signature-entry';
         figure.setAttribute('role', 'listitem');
