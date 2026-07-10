@@ -24,8 +24,8 @@ var TRANSLATIONS = {
     'countdown.minutes': 'Minuto(s)',
     'countdown.seconds': 'Segundo(s)',
     'rsvp.inviteDefault': 'Nos complace invitarte a nuestra boda',
-    'rsvp.inviteSingle': '{name}, nos complace invitarte a nuestra boda',
-    'rsvp.invitePlural': '{name}, nos complace invitarlos a nuestra boda',
+    'rsvp.inviteSuffixSingle': ', nos complace invitarte a nuestra boda',
+    'rsvp.inviteSuffixPlural': ', nos complace invitarlos a nuestra boda',
     'rsvp.btn': 'Confirma tu asistencia',
     'parents.title': 'Nuestros Padres',
     'parents.brideParents': 'Padres de La Novia',
@@ -119,8 +119,8 @@ var TRANSLATIONS = {
     'countdown.minutes': 'Minute(s)',
     'countdown.seconds': 'Second(s)',
     'rsvp.inviteDefault': 'We are pleased to invite you to our wedding',
-    'rsvp.inviteSingle': '{name}, we are pleased to invite you to our wedding',
-    'rsvp.invitePlural': '{name}, we are pleased to invite you to our wedding',
+    'rsvp.inviteSuffixSingle': ', we are pleased to invite you to our wedding',
+    'rsvp.inviteSuffixPlural': ', we are pleased to invite you to our wedding',
     'rsvp.btn': 'Confirm your attendance',
     'parents.title': 'Our Parents',
     'parents.brideParents': "Bride's Parents",
@@ -761,9 +761,9 @@ function initGuestbook() {
 
 function initRsvp() {
   var params = new URLSearchParams(window.location.search);
-  var guestId = params.get('id') ? decodeURIComponent(params.get('id')) : null;
-  var invitado1 = params.get('invitado1') ? decodeURIComponent(params.get('invitado1')) : null;
-  var invitado2 = params.get('invitado2') ? decodeURIComponent(params.get('invitado2')) : null;
+  var guestId = params.get('id') ? decodeURIComponent(params.get('id')).trim() : null;
+  var invitado1 = params.get('invitado1') ? decodeURIComponent(params.get('invitado1')).trim() : null;
+  var invitado2 = params.get('invitado2') ? decodeURIComponent(params.get('invitado2')).trim() : null;
   var ticketsParam = params.get('tickets') ? parseInt(params.get('tickets'), 10) : null;
   var maxTickets = ticketsParam && ticketsParam > 0 ? ticketsParam : 1;
 
@@ -785,7 +785,8 @@ function initRsvp() {
 
   var modal = document.getElementById('rsvp-modal');
   var rsvpBtn = document.getElementById('rsvp-btn');
-  var rsvpInvite = document.getElementById('rsvp-invite');
+  var rsvpGuestName = document.getElementById('rsvp-guest-name');
+  var rsvpInviteText = document.getElementById('rsvp-invite-text');
   var closeBtn = document.getElementById('rsvp-modal-close');
   var confirmBtn = document.getElementById('modal-confirm-btn');
   var customCountBtn = document.getElementById('modal-custom-count-btn');
@@ -807,16 +808,22 @@ function initRsvp() {
   }
 
   function updateInviteText() {
-    if (!rsvpInvite) {
+    if (!rsvpInviteText) {
       return;
     }
 
     if (nombreMostrado) {
-      rsvpInvite.textContent = t(esPlural ? 'rsvp.invitePlural' : 'rsvp.inviteSingle', {
-        name: nombreMostrado
-      });
+      if (rsvpGuestName) {
+        rsvpGuestName.textContent = nombreMostrado;
+      }
+      rsvpInviteText.textContent = t(esPlural ? 'rsvp.inviteSuffixPlural' : 'rsvp.inviteSuffixSingle');
+      rsvpInviteText.removeAttribute('data-i18n');
     } else {
-      rsvpInvite.textContent = t('rsvp.inviteDefault');
+      if (rsvpGuestName) {
+        rsvpGuestName.textContent = '';
+      }
+      rsvpInviteText.setAttribute('data-i18n', 'rsvp.inviteDefault');
+      rsvpInviteText.textContent = t('rsvp.inviteDefault');
     }
   }
 
