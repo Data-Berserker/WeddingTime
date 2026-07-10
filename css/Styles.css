@@ -391,7 +391,7 @@ ul {
 .rsvp-modal-tickets {
   margin-top: 10px;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 13px;
+  font-size: clamp(17px, 3.5vw, 21px);
   font-weight: 400;
   letter-spacing: 2px;
   text-transform: uppercase;
