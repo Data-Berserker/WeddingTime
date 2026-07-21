@@ -26,6 +26,9 @@ var TRANSLATIONS = {
     'rsvp.inviteDefault': 'Nos complace invitarte a nuestra boda',
     'rsvp.inviteSuffixSingle': ', nos complace invitarte a nuestra boda',
     'rsvp.inviteSuffixPlural': ', nos complace invitarlos a nuestra boda',
+    'rsvp.confirmPromptDefault': 'Esperamos contar contigo. Por favor confirma tu asistencia.',
+    'rsvp.confirmPromptSingle': 'Esperamos contar contigo. Por favor confirma tu asistencia.',
+    'rsvp.confirmPromptPlural': 'Esperamos contar con ustedes. Por favor confirmen su asistencia.',
     'rsvp.btn': 'Confirma tu asistencia',
     'parents.title': 'Nuestros Padres',
     'parents.brideParents': 'Padres de La Novia',
@@ -121,6 +124,9 @@ var TRANSLATIONS = {
     'rsvp.inviteDefault': 'We are pleased to invite you to our wedding',
     'rsvp.inviteSuffixSingle': ', we are pleased to invite you to our wedding',
     'rsvp.inviteSuffixPlural': ', we are pleased to invite you to our wedding',
+    'rsvp.confirmPromptDefault': 'We hope to see you there. Please confirm your attendance.',
+    'rsvp.confirmPromptSingle': 'We hope to see you there. Please confirm your attendance.',
+    'rsvp.confirmPromptPlural': 'We hope to see you there. Please confirm your attendance.',
     'rsvp.btn': 'Confirm your attendance',
     'parents.title': 'Our Parents',
     'parents.brideParents': "Bride's Parents",
@@ -787,6 +793,7 @@ function initRsvp() {
   var rsvpBtn = document.getElementById('rsvp-btn');
   var rsvpGuestName = document.getElementById('rsvp-guest-name');
   var rsvpInviteText = document.getElementById('rsvp-invite-text');
+  var rsvpConfirmPrompt = document.getElementById('rsvp-confirm-prompt');
   var closeBtn = document.getElementById('rsvp-modal-close');
   var confirmBtn = document.getElementById('modal-confirm-btn');
   var customCountBtn = document.getElementById('modal-custom-count-btn');
@@ -825,6 +832,19 @@ function initRsvp() {
       rsvpInviteText.setAttribute('data-i18n', 'rsvp.inviteDefault');
       rsvpInviteText.textContent = t('rsvp.inviteDefault');
     }
+  }
+
+  function updateConfirmPrompt() {
+    if (!rsvpConfirmPrompt) {
+      return;
+    }
+
+    var key = nombreMostrado
+      ? (esPlural ? 'rsvp.confirmPromptPlural' : 'rsvp.confirmPromptSingle')
+      : 'rsvp.confirmPromptDefault';
+
+    rsvpConfirmPrompt.setAttribute('data-i18n', key);
+    rsvpConfirmPrompt.textContent = t(key);
   }
 
   function formatGuestCount(count) {
@@ -868,6 +888,7 @@ function initRsvp() {
   }
 
   updateInviteText();
+  updateConfirmPrompt();
   updateModalLabels();
 
   function updateCountDisplay(count) {
@@ -1105,6 +1126,7 @@ function initRsvp() {
   onLanguageChange(function () {
     rebuildDisplayName();
     updateInviteText();
+    updateConfirmPrompt();
     updateModalLabels();
 
     if (!modal.hidden && ticketsParam && ticketsParam > 0 && ticketsVal) {
