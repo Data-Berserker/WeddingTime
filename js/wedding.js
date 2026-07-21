@@ -789,30 +789,9 @@ function initRsvp() {
   rebuildDisplayName();
   var esPlural = !!invitado2;
 
-  var modal = document.getElementById('rsvp-modal');
-  var rsvpBtn = document.getElementById('rsvp-btn');
   var rsvpGuestName = document.getElementById('rsvp-guest-name');
   var rsvpInviteText = document.getElementById('rsvp-invite-text');
   var rsvpConfirmPrompt = document.getElementById('rsvp-confirm-prompt');
-  var closeBtn = document.getElementById('rsvp-modal-close');
-  var confirmBtn = document.getElementById('modal-confirm-btn');
-  var customCountBtn = document.getElementById('modal-custom-count-btn');
-  var declineBtn = document.getElementById('modal-decline-btn');
-  var confirmCustomBtn = document.getElementById('modal-confirm-custom-btn');
-  var backBtn = document.getElementById('modal-back-btn');
-  var stepMain = document.getElementById('rsvp-step-main');
-  var stepCount = document.getElementById('rsvp-step-count');
-  var guestNameEl = document.getElementById('modal-guest-name');
-  var ticketsRow = document.getElementById('modal-tickets-row');
-  var ticketsVal = document.getElementById('modal-tickets-value');
-  var commentsEl = document.getElementById('modal-comments');
-  var countSlider = document.getElementById('modal-count-slider');
-  var countDisplay = document.getElementById('modal-count-display');
-  var countTicks = document.getElementById('modal-count-ticks');
-
-  if (!modal || !rsvpBtn) {
-    return;
-  }
 
   function updateInviteText() {
     if (!rsvpInviteText) {
@@ -843,8 +822,42 @@ function initRsvp() {
       ? (esPlural ? 'rsvp.confirmPromptPlural' : 'rsvp.confirmPromptSingle')
       : 'rsvp.confirmPromptDefault';
 
-    rsvpConfirmPrompt.setAttribute('data-i18n', key);
-    rsvpConfirmPrompt.textContent = t(key);
+    var text = t(key);
+    if (text === key && TRANSLATIONS.es[key]) {
+      text = TRANSLATIONS.es[key];
+    }
+    rsvpConfirmPrompt.textContent = text;
+  }
+
+  updateInviteText();
+  updateConfirmPrompt();
+
+  onLanguageChange(function () {
+    rebuildDisplayName();
+    updateInviteText();
+    updateConfirmPrompt();
+  });
+
+  var modal = document.getElementById('rsvp-modal');
+  var rsvpBtn = document.getElementById('rsvp-btn');
+  var closeBtn = document.getElementById('rsvp-modal-close');
+  var confirmBtn = document.getElementById('modal-confirm-btn');
+  var customCountBtn = document.getElementById('modal-custom-count-btn');
+  var declineBtn = document.getElementById('modal-decline-btn');
+  var confirmCustomBtn = document.getElementById('modal-confirm-custom-btn');
+  var backBtn = document.getElementById('modal-back-btn');
+  var stepMain = document.getElementById('rsvp-step-main');
+  var stepCount = document.getElementById('rsvp-step-count');
+  var guestNameEl = document.getElementById('modal-guest-name');
+  var ticketsRow = document.getElementById('modal-tickets-row');
+  var ticketsVal = document.getElementById('modal-tickets-value');
+  var commentsEl = document.getElementById('modal-comments');
+  var countSlider = document.getElementById('modal-count-slider');
+  var countDisplay = document.getElementById('modal-count-display');
+  var countTicks = document.getElementById('modal-count-ticks');
+
+  if (!modal || !rsvpBtn) {
+    return;
   }
 
   function formatGuestCount(count) {
@@ -887,8 +900,6 @@ function initRsvp() {
     }
   }
 
-  updateInviteText();
-  updateConfirmPrompt();
   updateModalLabels();
 
   function updateCountDisplay(count) {
@@ -1124,9 +1135,6 @@ function initRsvp() {
   });
 
   onLanguageChange(function () {
-    rebuildDisplayName();
-    updateInviteText();
-    updateConfirmPrompt();
     updateModalLabels();
 
     if (!modal.hidden && ticketsParam && ticketsParam > 0 && ticketsVal) {
