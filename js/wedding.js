@@ -1,4 +1,4 @@
-var SUPABASE_URL = 'https://zbwndyeozrpjrmltsdri.supabase.co/rest/v1';
+﻿var SUPABASE_URL = 'https://zbwndyeozrpjrmltsdri.supabase.co/rest/v1';
 var SUPABASE_ANON_KEY = 'sb_publishable_61Gn8It1YJxEXel2Z_xLqw_ScRM8tC4';
 var NTFY_TOPIC = 'Wedding_JC_Gabriela';
 
@@ -97,6 +97,7 @@ var TRANSLATIONS = {
     'rsvp.alert.saveError': 'Hubo un problema al guardar tu confirmación. Por favor intenta de nuevo.',
     'rsvp.alert.networkError': 'No se pudo conectar. Verifica tu conexión e intenta de nuevo.',
     'rsvp.alert.guestbookError': 'No se pudo guardar tu mensaje. Por favor intenta de nuevo.',
+    'rsvp.alert.linkInvalid': 'Este enlace de invitación ya no es válido. Por favor contacta a los novios para más información.',
     'rsvp.success.guestCount.one': '1 invitado',
     'rsvp.success.guestCount.many': '{n} invitados',
     'rsvp.success.confirmSingle': '¡Gracias, {name}! Tu asistencia ha sido confirmada para {count}.',
@@ -195,6 +196,7 @@ var TRANSLATIONS = {
     'rsvp.alert.saveError': 'There was a problem saving your confirmation. Please try again.',
     'rsvp.alert.networkError': 'Could not connect. Check your connection and try again.',
     'rsvp.alert.guestbookError': 'Could not save your message. Please try again.',
+    'rsvp.alert.linkInvalid': 'This invitation link is no longer valid. Please contact the couple for more information.',
     'rsvp.success.guestCount.one': '1 guest',
     'rsvp.success.guestCount.many': '{n} guests',
     'rsvp.success.confirmSingle': 'Thank you, {name}! Your attendance has been confirmed for {count}.',
@@ -860,6 +862,95 @@ function initRsvp() {
     return;
   }
 
+  var guestMismatch = false;
+  var guestCheckDone = !guestId;
+  var guestCheckPromise = null;
+
+  function normalizeGuestName(str) {
+    return (str || '')
+      .toString()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .toLowerCase();
+  }
+
+  function applyGuestMismatchState() {
+    if (!guestMismatch) {
+      return;
+    }
+
+    rsvpBtn.disabled = true;
+    rsvpBtn.classList.add('rsvp-btn--disabled');
+
+    if (rsvpConfirmPrompt) {
+      rsvpConfirmPrompt.removeAttribute('data-i18n');
+      rsvpConfirmPrompt.textContent = t('rsvp.alert.linkInvalid');
+    }
+
+    closeRsvpModal();
+  }
+
+  // Verifica contra Supabase que el nombre(s) de la URL siga correspondiendo
+  // al invitado real de ese id, para que un link viejo reciclado a otro
+  // invitado no pueda usarse para confirmar por error.
+  function checkGuestIdentity() {
+    if (!guestId) {
+      return Promise.resolve();
+    }
+
+    guestCheckPromise = fetch(SUPABASE_URL + '/invitados?id=eq.' + encodeURIComponent(guestId) + '&select=nombre,acompanante', {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+      }
+    })
+      .then(function (res) {
+        if (!res.ok) {
+          throw new Error('Supabase respondió ' + res.status);
+        }
+        return res.json();
+      })
+      .then(function (rows) {
+        var row = rows && rows[0];
+
+        if (!row) {
+          guestMismatch = true;
+          return;
+        }
+
+        var dbNombre = normalizeGuestName(row.nombre);
+        var dbAcompanante = normalizeGuestName(row.acompanante);
+        var urlInvitado1 = normalizeGuestName(invitado1);
+        var urlInvitado2 = normalizeGuestName(invitado2);
+
+        if (!urlInvitado1 || dbNombre !== urlInvitado1) {
+          guestMismatch = true;
+          return;
+        }
+
+        if (urlInvitado2 && dbAcompanante !== urlInvitado2) {
+          guestMismatch = true;
+        }
+      })
+      .catch(function (e) {
+        console.error('Error validando invitado:', e);
+        guestMismatch = true;
+      })
+      .finally(function () {
+        guestCheckDone = true;
+        applyGuestMismatchState();
+      });
+
+    return guestCheckPromise;
+  }
+
+  checkGuestIdentity();
+
+  onLanguageChange(function () {
+    applyGuestMismatchState();
+  });
+
   function formatGuestCount(count) {
     return count === 1
       ? t('rsvp.modal.guestCount.one')
@@ -969,6 +1060,24 @@ function initRsvp() {
   }
 
   function openRsvpModal() {
+    if (guestMismatch) {
+      showMessage(t('rsvp.alert.linkInvalid'));
+      return;
+    }
+
+    if (guestId && !guestCheckDone) {
+      // La validación contra Supabase todavía no responde: esperamos a que
+      // termine antes de dejar pasar al modal, en vez de abrirlo a ciegas.
+      rsvpBtn.disabled = true;
+      Promise.resolve(guestCheckPromise).finally(function () {
+        rsvpBtn.disabled = guestMismatch;
+        if (!guestMismatch) {
+          openRsvpModal();
+        }
+      });
+      return;
+    }
+
     guestNameEl.textContent = nombreMostrado || t('rsvp.modal.guest');
     showMainStep();
 
@@ -1010,6 +1119,12 @@ function initRsvp() {
   }
 
   function submitRsvp(respuesta, pasesConfirmados) {
+    if (guestMismatch) {
+      showMessage(t('rsvp.alert.linkInvalid'));
+      closeRsvpModal();
+      return;
+    }
+
     if (!guestId) {
       showMessage(t('rsvp.alert.noId'));
       return;
