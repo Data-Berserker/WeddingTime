@@ -1086,6 +1086,28 @@ ul {
   letter-spacing: 0.5px;
 }
 
+.gifts-envelope-heading {
+  margin-top: 72px;
+}
+
+.gifts-envelope-card {
+  margin-top: 0;
+}
+
+.gifts-envelope-icon {
+  display: block;
+  margin: 0 auto 20px;
+  color: var(--tan);
+}
+
+.gifts-envelope-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(17px, 3vw, 20px);
+  font-weight: 300;
+  color: var(--black);
+  line-height: 1.6;
+}
+
 /* ── Galería ── */
 .gallery-section {
   padding: 0 24px 88px;
